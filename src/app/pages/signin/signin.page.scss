@@ -1,0 +1,60 @@
+ion-content {
+  --background: none;
+  background-image: url("../../../assets/image/back_im.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 100% 46vh;
+
+  .content-section {
+    width: 100%;
+    padding: 4vh 24px 20px 20px;
+    margin-top: 38vh;
+    background-color: var(--white);
+    border-radius: 17px 17px 0px 0px;
+
+    .title {
+      font-family: "sf_ui_b";
+      font-size: 40px;
+      color: var(--black);
+      margin: 0px;
+    }
+    .simple_lbl {
+      color: var(--lht_gray);
+      margin: 0px;
+      font-size: 16px;
+      font-family: "sf_ui_r";
+    }
+
+    .email-input {
+      margin-bottom: 6px;
+      margin-top: 4vh;
+    }
+    .btn-login {
+      margin: 4vh 0px 0px 0px;
+    }
+    .btn_forgot {
+      --color: var(--lht_bc);
+      text-transform: capitalize;
+      font-family: "sf_ui_md";
+      margin: 12px 0px 19px 0px;
+      height: 18px;
+    }
+    .account-text {
+      // margin-top: 3vh;
+      margin: 0;
+      font-size: 14px;
+      font-family: "sf_ui_r";
+      color: var(--lht_gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      ion-button {
+        text-transform: none;
+        --color: var(--my_theme);
+        font-family: "sf_ui_b";
+        margin-left: 5px;
+        height: 20px;
+      }
+    }
+  }
+}

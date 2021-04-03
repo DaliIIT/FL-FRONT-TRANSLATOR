@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" icon="chevron-back-outline" text="" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <h3 class="main_lbl ion-padding-start">New Paid User</h3>
+  <div class="newuser">
+    <div class="card_div" *ngFor="let item of newUSer">
+      <div class="data_div">
+        <img [src]="item?.img">
+        <div class="info_div">
+          <h3 class="name">{{item?.name}}</h3>
+          <p class="ago">{{item?.ago}}</p>
+        </div>
+      </div>
+      <div class="detail_div">
+        <p class="detail_lbl">{{item?.detail}}</p>
+      </div>
+    </div>
+  </div>
+  <h3 class="info_lbl ion-padding-start">26,Nov 2019</h3>
+  <div class="today_div">
+    <ion-item *ngFor="let item of today" lines="full" (click)="chat()" mode="md">
+      <ion-avatar slot="start">
+        <img [src]="item?.img">
+
+      </ion-avatar>
+      <ion-label>
+        <h3 class="name">{{item?.name}} <span class="ion-float-right">{{item?.ago}}</span></h3>
+        <p class="detail">{{item?.detail}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+  <h3 class="info_lbl ion-padding-start">25,Nov 2019</h3>
+  <div class="today_div">
+    <ion-item *ngFor="let item of yesterday" lines="full" (click)="chat()" mode="md">
+      <ion-avatar slot="start">
+        <img [src]="item?.img">
+      </ion-avatar>
+      <ion-label>
+        <h3 class="name">{{item?.name}} <span class="ion-float-right">{{item?.ago}}</span></h3>
+        <p class="detail">{{item?.detail}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

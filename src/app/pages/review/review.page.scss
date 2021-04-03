@@ -1,0 +1,78 @@
+ion-content {
+  .main_lbl {
+    font-size: 16px;
+    color: var(--blue);
+    font-family: "sf_ui_md";
+  }
+  .card_div {
+    display: flex;
+    margin-bottom: 15px;
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: solid 3px var(--white);
+      box-shadow: 0px 1px 2px 0px rgba(31, 140, 237, 0.2);
+    }
+    .data_div {
+      padding-left: 15px;
+      .name {
+        font-size: 12px;
+        font-family: "sf_ui_md";
+        color: var(--blue);
+        margin-top: 2px;
+        margin-bottom: 3px;
+
+        span {
+          ion-icon {
+            height: 14px;
+            width: 14px;
+            margin-left: 1px;
+            color: var(--star);
+          }
+          .rated_ic {
+            color: var(--my_theme);
+          }
+        }
+      }
+      .ago {
+        font-size: 11px;
+        font-family: "sf_ui_r";
+        color: var(--lht_blue);
+        margin-top: 0px;
+        margin-bottom: 5px;
+      }
+      .detail {
+        font-size: 12px;
+      }
+      .help_div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        .help_lbl {
+          font-size: 12px;
+          color: var(--blue);
+          font-family: "sf_ui_md";
+          margin: 0;
+        }
+        ion-button {
+          width: 50px;
+          height: 20px;
+          --border-radius: 10px;
+          font-size: 10px;
+          font-family: "sf_ui_md";
+          --color: var(--white);
+          text-transform: capitalize;
+        }
+        .yes_btn {
+          --background: var(--my_theme);
+          margin-right: 10px;
+        }
+        .no_btn {
+          --background: var(--red);
+        }
+      }
+    }
+  }
+}

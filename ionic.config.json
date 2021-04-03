@@ -1,0 +1,7 @@
+{
+  "name": "doctroadmin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

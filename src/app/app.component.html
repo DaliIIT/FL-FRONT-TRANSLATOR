@@ -1,0 +1,53 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="reveal">
+      <ion-header class="ion-no-border">
+        <ion-toolbar mode="md">
+          <ion-buttons slot="start">
+            <ion-button (click)="closeMenu()">
+              <ion-icon name="chevron-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="editProfile()">
+              <ion-icon src="../assets/image_icon/edit.svg" class="st_icon"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <div class="profile_div">
+          <img src="../assets/image/patricia.png">
+          <div class="data_div">
+            <h3 class="name">Dr.Rose Ortiz</h3>
+            <p class="email">Orthopedics</p>
+            <p class="email">+44 903 397 6854</p>
+          </div>
+        </div>
+
+      </ion-header>
+      <ion-content>
+        <ion-list id="inbox-list" mode="md">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none"
+              detail="false" [class.selected]="selectedIndex == i">
+              <ion-label>
+                <ion-button [class.menubtn]="selectedIndex == i" class="menubtnde" shape="round">
+                  {{ p.title }}
+                </ion-button>
+              </ion-label>
+            </ion-item>
+
+          </ion-menu-toggle>
+          <ion-item lines="none" detail="false" (click)="logout()">
+            <ion-label>
+              <ion-button class="menubtnde logout" shape="round">
+                Logout
+              </ion-button>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div (click)="presentAlertRadio()" class="locationContent">
+      <img src="../../assets/image/location.png">
+      <div class="textContent">
+        <h2 class="location">{{selectedLocation}} <img src="../../assets/image/BACK.png"> </h2>
+        <p class="address">46 Park Avenue 98 Station Road, Wembley London</p>
+      </div>
+    </div>
+  </ion-toolbar>
+  <div class="search_div ion-margin-horizontal">
+
+    <ion-searchbar mode="md" clearIcon="string" placeholder="Search here"></ion-searchbar>
+  </div>
+
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <p class="main_lbl ion-margin-start">Payment History</p>
+  <div class="appoinment_div">
+    <div class="single_app" *ngFor="let item of appoinment">
+      <div class="day_div">
+        <p class="day">{{item?.day}}</p>
+        <p class="day date">{{item?.date}}</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="date_div">
+    <ion-row>
+      <ion-col class="first_Col">
+        <h3 class="date_lbl">Start Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="1 Nov 2019"></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <h3 class="date_lbl">End Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="30 Nov 2019"></ion-datetime>
+      </ion-col>
+    </ion-row>
+  </div>
+  <p class="main_lbl ion-margin-horizontal patient_lbl">Patient List <span>1 Nov To 30 Nov</span></p>
+  <p class="total_lbl ion-padding-horizontal ion-text-end">Total 120</p>
+  <ion-item mode="md" *ngFor="let item of patientList" lines="full">
+    <ion-label slot="start" class="st_lbl">{{item?.name}}</ion-label>
+    <ion-label slot="end" class="st_lbl ion-text-end">{{item?.price}}</ion-label>
+  </ion-item>
+  <div class="total_div ion-margin-horizontal">
+    <p class="view_all">
+
+      <span>
+        View all
+      </span>
+      <img src="../../../assets/image_icon/arrow-right.svg">
+      <span class="ion-float-right">120</span>
+    </p>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="foot_div">
+    <h3 class="foot_lbl">TOTAL <span class="ion-float-right">$2200</span></h3>
+  </div>
+</ion-footer>

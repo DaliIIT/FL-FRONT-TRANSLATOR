@@ -1,0 +1,89 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div (click)="presentAlertRadio()" class="locationContent">
+      <img src="../../assets/image/location.png">
+      <div class="textContent">
+        <h2 class="location">{{selectedLocation}} <img src="../../assets/image/BACK.png"> </h2>
+        <p class="address">46 Park Avenue 98 Station Road, Wembley London</p>
+      </div>
+    </div>
+  </ion-toolbar>
+  <div class="search_div ion-margin-horizontal">
+
+    <ion-searchbar mode="md" clearIcon="string" placeholder="Search here"></ion-searchbar>
+  </div>
+
+</ion-header>
+
+<ion-content>
+  <p class="main_lbl ion-margin-start">Appointment</p>
+  <div class="appoinment_div">
+    <div class="single_app" *ngFor="let item of appoinment">
+      <div class="day_div">
+        <p class="day">{{item?.day}}</p>
+        <p class="day date">{{item?.date}}</p>
+      </div>
+
+    </div>
+  </div>
+  <p class="main_lbl ion-margin-horizontal">Today's Appointment <span class="ion-float-right">8 Appointment</span></p>
+  <div class="title_div">
+    <h3 class="title">Morning</h3>
+  </div>
+  <div class="data_div" *ngFor="let item of morning" (click)="patientInfo()">
+    <p class="time">{{item?.time}}</p>
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="info_div">
+        <h3 class="name">{{item?.name}} <span>{{item?.price}}</span></h3>
+        <p class="age">Age : {{item?.age}}</p>
+        <p class="add">{{item?.add}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="title_div">
+    <h3 class="title">Afternoon</h3>
+  </div>
+  <div class="data_div" *ngFor="let item of afternoon" (click)="patientInfo()">
+    <p class="time">{{item?.time}}</p>
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="info_div">
+        <h3 class="name">{{item?.name}} <span>{{item?.price}}</span></h3>
+        <p class="age">Age : {{item?.age}}</p>
+        <p class="add">{{item?.add}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="title_div">
+    <h3 class="title">Evening</h3>
+  </div>
+  <div class="data_div" *ngFor="let item of Evening" (click)="patientInfo()">
+    <p class="time">{{item?.time}}</p>
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="info_div">
+        <h3 class="name">{{item?.name}} <span>{{item?.price}}</span></h3>
+        <p class="age">Age : {{item?.age}}</p>
+        <p class="add">{{item?.add}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="title_div">
+    <h3 class="title">Night</h3>
+  </div>
+  <div class="data_div" *ngFor="let item of Night" (click)="patientInfo()">
+    <p class="time">{{item?.time}}</p>
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="info_div">
+        <h3 class="name">{{item?.name}} <span>{{item?.price}}</span></h3>
+        <p class="age">Age : {{item?.age}}</p>
+        <p class="add">{{item?.add}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

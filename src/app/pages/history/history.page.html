@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div (click)="presentAlertRadio()" class="locationContent">
+      <img src="../../assets/image/location.png">
+      <div class="textContent">
+        <h2 class="location">{{selectedLocation}} <img src="../../assets/image/BACK.png"> </h2>
+        <p class="address">46 Park Avenue 98 Station Road, Wembley London</p>
+      </div>
+    </div>
+  </ion-toolbar>
+  <div class="search_div ion-margin-horizontal">
+
+    <ion-searchbar mode="md" clearIcon="string" placeholder="Search here"></ion-searchbar>
+  </div>
+
+</ion-header>
+
+<ion-content>
+  <p class="main_lbl ion-margin-start">Appointment History</p>
+  <div class="date_div">
+    <ion-row>
+      <ion-col class="first_Col">
+        <h3 class="date_lbl">Start Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="1 Nov 2019"></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <h3 class="date_lbl">End Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="30 Nov 2019"></ion-datetime>
+      </ion-col>
+    </ion-row>
+  </div>
+  <p class="main_lbl ion-margin-start">Upcoming Appointment</p>
+  <div class="upcoming" *ngFor="let item of upcoming">
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="data_div">
+        <p class="name">{{item?.name}} <ion-button class="transparent_btn ion-float-end">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </p>
+        <p class="type">{{item?.type}}</p>
+        <p class="type add">{{item?.add}}</p>
+
+      </div>
+    </div>
+    <div class="info_div">
+      <p class="date_lbl">Date & Time <span class="ion-float-end">Patient Name</span></p>
+      <p class="time_lbl"> {{item?.date}} <span class="ion-float-end">{{item?.pname}}</span></p>
+    </div>
+  </div>
+  <p class="main_lbl ion-margin-start">Past Appointment</p>
+  <div class="upcoming" *ngFor="let item of data">
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="data_div">
+        <p class="name">{{item?.name}} <ion-button class="transparent_btn ion-float-end">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </p>
+        <p class="type">{{item?.type}}</p>
+        <p class="type add">{{item?.add}}</p>
+
+      </div>
+    </div>
+    <div class="info_div">
+      <p class="date_lbl">Date & Time <span class="ion-float-end">Patient Name</span></p>
+      <p class="time_lbl"> {{item?.date}} <span class="ion-float-end">{{item?.pname}}</span></p>
+    </div>
+  </div>
+</ion-content>

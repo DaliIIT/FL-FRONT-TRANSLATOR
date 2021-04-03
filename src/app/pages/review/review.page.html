@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div (click)="presentAlertRadio()" class="locationContent">
+      <img src="../../assets/image/location.png">
+      <div class="textContent">
+        <h2 class="location">{{selectedLocation}} <img src="../../assets/image/BACK.png"> </h2>
+        <p class="address">46 Park Avenue 98 Station Road, Wembley London</p>
+      </div>
+    </div>
+  </ion-toolbar>
+  <div class="search_div ion-margin-horizontal">
+
+    <ion-searchbar mode="md" clearIcon="string" placeholder="Search here"></ion-searchbar>
+  </div>
+
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <h3 class="main_lbl">Review and Rating</h3>
+  <div class="card_div" *ngFor="let item of review">
+    <img [src]="item?.img">
+    <div class="data_div">
+      <h3 class="name">{{item?.name}} <span class="ion-float-right">
+          <ion-icon name="star" [ngClass]="item?.rate >= 1 ? 'rated_ic' : ''"></ion-icon>
+          <ion-icon name="star" [ngClass]="item?.rate >= 2 ? 'rated_ic' : ''"></ion-icon>
+          <ion-icon name="star" [ngClass]="item?.rate >= 3 ? 'rated_ic' : ''"></ion-icon>
+          <ion-icon name="star" [ngClass]="item?.rate >= 4 ? 'rated_ic' : ''"></ion-icon>
+          <ion-icon name="star" [ngClass]="item?.rate >= 5 ? 'rated_ic' : ''"></ion-icon>
+        </span></h3>
+      <p class="ago">{{item?.ago}}</p>
+      <p class="ago detail">{{item?.detail}}</p>
+      <div class="help_div" *ngIf="item?.ishelp">
+        <p class="help_lbl">Was this helpful?</p>
+
+        <div>
+          <ion-button class="yes_btn">
+            Yes
+          </ion-button>
+          <ion-button class="no_btn">No
+          </ion-button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

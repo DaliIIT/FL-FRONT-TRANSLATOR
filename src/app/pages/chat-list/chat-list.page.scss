@@ -1,0 +1,110 @@
+ion-header {
+  ion-back-button {
+    color: var(--blue);
+  }
+  ion-title {
+    color: var(--blue);
+    text-align: center;
+    font-size: 18px;
+    font-family: "sf_ui_sb";
+    text-transform: capitalize;
+  }
+}
+
+ion-content {
+  .main_lbl {
+    font-size: 18px;
+    color: var(--blue);
+    font-family: "sf_ui_md";
+  }
+  .newuser {
+    padding-left: 16px;
+    display: -webkit-box;
+    overflow-x: auto;
+    .card_div {
+      border-radius: 5px;
+      box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.16);
+      width: 285px;
+      margin: 10px 20px 10px 0px;
+      .data_div {
+        display: flex;
+        padding: 15px;
+        border-bottom: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: var(--silver);
+        img {
+          height: 45px;
+          width: 45px;
+          border-radius: 50px;
+          border: solid 3px var(--white);
+          box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+        .info_div {
+          padding-left: 15px;
+          .name {
+            font-size: 15px;
+            color: var(--blue);
+            font-family: "sf_ui_md";
+            margin-top: 3px;
+            margin-bottom: 2px;
+          }
+          .ago {
+            font-size: 12px;
+            color: var(--lht_blue);
+            font-family: "sf_ui_md";
+            margin: 0;
+          }
+        }
+      }
+      .detail_div {
+        padding: 15px;
+        .detail_lbl {
+          font-size: 12px;
+          color: var(--lht_blue);
+          font-family: "sf_ui_md";
+          margin: 0;
+        }
+      }
+    }
+  }
+  .newuser::-webkit-scrollbar {
+    display: none;
+  }
+  .info_lbl {
+    font-size: 12px;
+    font-family: "sf_ui_md";
+    color: var(--lht_blue);
+  }
+
+  .today_div {
+    padding: 0px 16px;
+
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      ion-avatar {
+        height: 55px;
+        width: 55px;
+        img {
+          border: solid 3px var(--white);
+          box-shadow: 0px 0px 3px 0px rgba(31, 140, 237, 0.3);
+        }
+      }
+      .name {
+        font-size: 15px;
+        font-family: "sf_ui_md";
+        color: var(--blue);
+        span {
+          font-size: 11px;
+          font-family: "sf_ui_r";
+          color: var(--blue);
+        }
+      }
+      .detail {
+        font-size: 13px;
+        font-family: "sf_ui_md";
+        color: var(--lht_blue);
+      }
+    }
+  }
+}

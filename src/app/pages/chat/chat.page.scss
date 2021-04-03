@@ -1,0 +1,106 @@
+ion-header {
+  ion-back-button {
+    color: var(--blue);
+  }
+  ion-title {
+    color: var(--blue);
+    text-align: center;
+    font-size: 18px;
+    font-family: "sf_ui_sb";
+    text-transform: capitalize;
+  }
+}
+ion-content {
+  .td_lbl {
+    font-size: 12px;
+    color: var(--blue);
+    font-family: "sf_ui_md";
+    text-align: center;
+  }
+  .chat_div {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    img {
+      height: 57px;
+      width: 57px;
+      border-radius: 50%;
+      border: solid 3px var(--white);
+      box-shadow: 0px 0px 5px 0px rgba(31, 140, 237, 0.25);
+    }
+
+    .message_div {
+      .chat {
+        width: 230px;
+        box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        margin-left: 15px;
+        border-radius: 5px;
+        .chat_lbl {
+          font-size: 14px;
+          color: var(--blue);
+          font-family: "sf_ui_md_i";
+          margin-top: 0;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .time {
+      font-size: 12px;
+      color: var(--lht_blue);
+      font-family: "sf_ui_md";
+      margin-top: 8px;
+      margin-bottom: 0;
+      text-align: end;
+    }
+  }
+  .replay_div {
+    display: flex;
+    justify-content: flex-end;
+
+    .message_div {
+      .chat {
+        width: 250px;
+        margin-right: 15px;
+        margin-left: 0;
+        background-color: var(--my_theme);
+        box-shadow: none;
+        .chat_lbl {
+          color: var(--white);
+        }
+      }
+    }
+    .time {
+      text-align: start;
+    }
+  }
+}
+
+ion-footer {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.2);
+  ion-item {
+    width: 100%;
+    ion-input {
+      font-size: 12px;
+      font-family: "rubik_i";
+      color: var(--gray);
+    }
+  }
+  .send_btn {
+    height: 50px;
+    width: 50px;
+    --background: var(--my_theme);
+    margin: 0;
+    --border-radius: 0px;
+    min-width: 50px;
+    --padding-start: 0;
+    --padding-end: 0;
+    ion-icon {
+      width: 27px;
+      height: 27px;
+    }
+  }
+}

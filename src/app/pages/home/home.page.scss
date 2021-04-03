@@ -1,0 +1,115 @@
+ion-content {
+  .main_lbl {
+    font-size: 16px;
+    color: var(--blue);
+    font-family: "sf_ui_md";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      font-size: 13px;
+      color: var(--my_theme);
+    }
+  }
+  .appoinment_div {
+    display: -webkit-box;
+    overflow-x: auto;
+    padding: 3px 0px 10px 16px;
+    .single_app {
+      width: 120px;
+      height: 50px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .day {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: var(--blue);
+        font-family: "sf_ui_md";
+        text-align: center;
+      }
+      .date {
+        margin: 0;
+      }
+    }
+  }
+  .appoinment_div::-webkit-scrollbar {
+    display: none;
+  }
+  .title_div {
+    height: 40px;
+    background-color: var(--div_back);
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    .title {
+      font-size: 16px;
+      font-family: "sf_ui_md";
+      color: var(--blue);
+      margin: 0;
+    }
+  }
+  .data_div {
+    display: flex;
+    padding: 10px 16px;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    .time {
+      font-size: 16px;
+      color: var(--lht_blue);
+      font-family: "sf_ui_md";
+      margin: 0;
+      width: 50px;
+      text-align: center;
+    }
+    .card_div {
+      display: flex;
+      margin-left: 10px;
+      padding: 5px 10px 5px 5px;
+      border-radius: 5px;
+      box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.16);
+      width: 100%;
+      img {
+        height: 58px;
+        width: 58px;
+        border-radius: 5px;
+      }
+      .info_div {
+        padding-left: 15px;
+        width: 100%;
+        padding-top: 3px;
+        .name {
+          font-size: 16px;
+          color: var(--blue);
+          font-family: "sf_ui_md";
+          margin: 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          span {
+            font-size: 12px;
+          }
+        }
+        .age {
+          font-size: 12px;
+          color: var(--blue);
+          font-family: "sf_ui_md";
+          margin: 3px 0px;
+        }
+        .add {
+          font-size: 12px;
+          color: var(--lht_blue);
+          font-family: "sf_ui_r";
+          margin: 0;
+        }
+      }
+    }
+  }
+}

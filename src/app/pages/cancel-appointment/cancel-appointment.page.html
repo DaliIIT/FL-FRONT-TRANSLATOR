@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div (click)="presentAlertRadio()" class="locationContent">
+      <img src="../../assets/image/location.png">
+      <div class="textContent">
+        <h2 class="location">{{selectedLocation}} <img src="../../assets/image/BACK.png"> </h2>
+        <p class="address">46 Park Avenue 98 Station Road, Wembley London</p>
+      </div>
+    </div>
+  </ion-toolbar>
+  <div class="search_div ion-margin-horizontal">
+
+    <ion-searchbar mode="md" clearIcon="string" placeholder="Search here"></ion-searchbar>
+  </div>
+
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <p class="main_lbl ion-margin-start">Cancel Appointment Time</p>
+  <div class="date_div">
+    <ion-row>
+      <ion-col class="first_Col">
+        <h3 class="date_lbl">Start Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="1 Nov 2019"></ion-datetime>
+        <ion-datetime id="dynamicDisabled" displayFormat="hh:mm a" placeholder="10:00am" class="time_l"></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <h3 class="date_lbl">End Date</h3>
+        <ion-datetime id="dynamicDisabled" displayFormat="DD MMM YYYY" placeholder="30 Nov 2019"></ion-datetime>
+        <ion-datetime id="dynamicDisabled" displayFormat="hh:mm a" placeholder="10:00am" class="time_l"></ion-datetime>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="head_div">
+    <h3 class="main_lbl head_lbl">Morning <span class="ion-float-right">4 Appointment Cancel</span></h3>
+  </div>
+  <div class="data_div" *ngFor="let item of cancelAppoint">
+    <p class="time">{{item?.time}}</p>
+    <div class="card_div">
+      <img [src]="item?.img">
+      <div class="info_div">
+        <h3 class="name">{{item?.name}} <span>{{item?.price}}</span></h3>
+        <p class="age">Age : {{item?.age}}</p>
+        <p class="add">{{item?.add}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button class="main_btn" expand="full">
+    cancel appointment
+  </ion-button>
+</ion-footer>

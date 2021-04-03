@@ -1,0 +1,40 @@
+ion-content {
+  .main_lbl {
+    font-size: 30px;
+    color: var(--blue);
+    font-family: "sf_ui_b";
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+  .genral_input {
+    margin-bottom: 20px;
+  }
+  .btn-login {
+    margin-top: 20px;
+  }
+  .term_lbl {
+    font-size: 11px;
+    color: var(--blue);
+    text-align: center;
+    font-family: "sf_ui_r";
+    padding: 0px 5vh;
+  }
+  .account-text {
+    // margin-top: 3vh;
+    margin: 5px 0px 10px 0px;
+    font-size: 14px;
+    font-family: "sf_ui_r";
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-button {
+      text-transform: none;
+      --color: var(--my_theme);
+      font-family: "sf_ui_b";
+      margin-left: 5px;
+      height: 20px;
+    }
+  }
+}

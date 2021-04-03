@@ -1,0 +1,126 @@
+ion-content {
+  .main_lbl {
+    font-size: 16px;
+    color: var(--blue);
+    font-family: "sf_ui_md";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      font-size: 13px;
+      color: var(--my_theme);
+    }
+  }
+  .appoinment_div {
+    display: -webkit-box;
+    overflow-x: auto;
+    padding: 3px 0px 10px 16px;
+    .single_app {
+      width: 120px;
+      height: 50px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .day {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: var(--blue);
+        font-family: "sf_ui_md";
+        text-align: center;
+      }
+      .date {
+        margin: 0;
+      }
+    }
+  }
+  .appoinment_div::-webkit-scrollbar {
+    display: none;
+  }
+  .date_div {
+    background-color: var(--div_back);
+    height: 60px;
+    margin-top: 10px;
+    ion-col {
+      text-align: center;
+      padding: 11px 0px 0px 0px;
+      .date_lbl {
+        font-size: 14px;
+        color: var(--blue);
+        font-family: "sf_ui_md";
+        margin: 0;
+      }
+      ion-datetime {
+        color: var(--my_theme);
+        font-family: "sf_ui_md";
+        font-size: 14px;
+        padding-left: 0;
+        padding-top: 5px;
+      }
+    }
+    .first_Col {
+      border-right: solid;
+      border-right-color: var(--lht_blue);
+      border-right-width: 1px;
+    }
+  }
+  .patient_lbl {
+    margin-bottom: 0;
+  }
+  .total_lbl {
+    font-size: 13px;
+    font-family: "sf_ui_md";
+    color: var(--lht_blue);
+    margin: 0;
+  }
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin: 0px 16px;
+    .st_lbl {
+      font-size: 14px;
+      font-family: "sf_ui_md";
+      color: var(--lht_blue);
+    }
+  }
+  .total_div {
+    background-color: var(--div_back);
+    border-radius: 5px;
+    height: 44px;
+    padding: 0px 16px;
+    align-items: center;
+    display: flex;
+    margin-top: 15px;
+
+    .view_all {
+      font-size: 14px;
+      font-family: "sf_ui_sb";
+      color: var(--blue);
+      margin: 0;
+      width: 100%;
+      img {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+ion-footer {
+  .foot_div {
+    padding: 0px 16px;
+    height: 50px;
+    background-color: var(--my_theme);
+    display: flex;
+    align-items: center;
+    .foot_lbl {
+      font-size: 16px;
+      color: var(--white);
+      font-family: "sf_ui_md";
+      margin: 0;
+      width: 100%;
+    }
+  }
+}

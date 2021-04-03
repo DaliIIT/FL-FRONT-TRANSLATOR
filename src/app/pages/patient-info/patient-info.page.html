@@ -1,0 +1,154 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home" icon="chevron-back-outline" text="" mode="md"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="profile_div">
+    <div class="ic_div" (click)="presentModal()">
+      <ion-icon src="../../../assets/image_icon/call.svg">
+      </ion-icon>
+    </div>
+    <div class="img_div">
+      <img src="../../../assets/image/benjamin.png">
+    </div>
+    <div class="ic_div" (click)="chat()">
+      <ion-icon src="../../../assets/image_icon/message.svg">
+      </ion-icon>
+    </div>
+  </div>
+  <h3 class="name">George Bradley</h3>
+  <p class="book_id">Booking ID : 236 598 5478</p>
+  <div class="h_info">
+    <p class="info_lbl">$100 Paid</p>
+    <p class="info_lbl">05,Nov 2019</p>
+    <p class="info_lbl">2<sup>nd</sup> Visit</p>
+  </div>
+  <div class="seg_div">
+    <ion-button class="transparent_btn segment_btn" (click)="chageTab('PatientInfo')"
+      [ngClass]="{ active: activeTab == 'PatientInfo' }">
+      Patient<br>
+      Information
+    </ion-button>
+    <ion-button class="transparent_btn segment_btn" (click)="chageTab('PatientIll')"
+      [ngClass]="{ active: activeTab == 'PatientIll' }">
+      Patient<br>
+      Illness
+    </ion-button>
+    <ion-button class="transparent_btn segment_btn" (click)="chageTab('Doctorpre')"
+      [ngClass]="{ active: activeTab == 'Doctorpre' }">
+      Doctor<br>
+      Prescription
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal ion-padding-bottom">
+  <ng-container [ngSwitch]="activeTab">
+    <ng-container *ngSwitchCase="'PatientInfo'">
+      <div class="bio_div">
+        <h3 class="per_lbl">Personal Bio</h3>
+        <p class="data_lbl">Fusce at nisi eget dolor rhoncus facilisis. Mauris ante nisl, consectetur et luctus et,
+          porta
+          ut dolor. Curabitur
+          ultricies ultrices nulla. Morbi blandit nec est vitae dictum. Etiam vel consectetur diam. Maecenas vitae
+          egestas
+          dolor.</p>
+      </div>
+      <h3 class="per_lbl">Patient Name</h3>
+      <p class="data_lbl name">Michelle Ford</p>
+      <h3 class="per_lbl">Age</h3>
+      <p class="data_lbl name">60</p>
+      <h3 class="per_lbl">Phone Number</h3>
+      <p class="data_lbl name">+44 365 875 3598</p>
+      <h3 class="per_lbl">Address</h3>
+      <p class="data_lbl name">Low Mill Farm Lendales Lane UK</p>
+    </ng-container>
+    <ng-container *ngSwitchCase="'PatientIll'">
+      <div class="illness">
+        <h3 class="per_lbl">Patient illness information <ion-button class="transparent_btn ion-float-end">
+            <ion-icon src="../../../assets/image_icon/edit.svg"></ion-icon>
+          </ion-button>
+        </h3>
+        <div class="info_div">
+          <div class="dot_div">
+          </div>
+          <p class="data_lbl name">Heavy Knees Pain</p>
+        </div>
+        <div class="info_div">
+          <div class="dot_div">
+          </div>
+          <p class="data_lbl name">headache</p>
+        </div>
+        <div class="info_div">
+          <div class="dot_div">
+          </div>
+          <p class="data_lbl name">Cold</p>
+        </div>
+        <div class="info_div">
+          <div class="dot_div">
+          </div>
+          <p class="data_lbl name">Full Body Pain</p>
+        </div>
+        <p class="red_lbl">There has been a lot of pain for five days.</p>
+      </div>
+
+    </ng-container>
+    <ng-container *ngSwitchCase="'Doctorpre'">
+      <div class="prescription_div">
+        <h3 class="per_lbl side_lbl">Side effect of drug.</h3>
+        <p class="data_lbl name">Lorazepam</p>
+        <div class="medicine">
+          <p class="per_lbl">Medicine <ion-button class="transparent_btn ion-float-end">
+              <ion-icon src="../../../assets/image_icon/add-box.svg"></ion-icon>
+            </ion-button>
+          </p>
+          <p class="medi_lbl">Omeprazole (10 Tablets) <span class="ion-float-right">
+              <div class="dot_div get_div cl_get"></div>
+              <div class="dot_div get_div"></div>
+              <div class="dot_div get_div cl_get"></div>
+            </span></p>
+          <p class="medi_lbl">Ibuprofen (5 Tablets)
+            <span class="ion-float-right">
+              <div class="dot_div get_div"></div>
+              <div class="dot_div get_div"></div>
+              <div class="dot_div get_div cl_get"></div>
+            </span>
+          </p>
+          <p class="medi_lbl">Tramadol (5 Tablets)
+            <span class="ion-float-right">
+              <div class="dot_div get_div"></div>
+              <div class="dot_div get_div cl_get"></div>
+              <div class="dot_div get_div"></div>
+            </span>
+          </p>
+        </div>
+        <div class="take_medition">
+          <h3 class="take_lbl">How to take medicine</h3>
+          <div class="noon_div">
+            <div class="time_div">
+              <div class="dot_div">
+              </div>
+              <h3 class="dot_lbl">M</h3>
+            </div>
+            <div class="time_div">
+              <div class="dot_div cl_dot">
+              </div>
+              <h3 class="dot_lbl">N</h3>
+            </div>
+            <div class="time_div">
+              <div class="dot_div">
+              </div>
+              <h3 class="dot_lbl">N</h3>
+            </div>
+          </div>
+          <div class="morning">
+            <p class="mr_lbl">Morning</p>
+            <p class="mr_lbl after_lbl">Afternoon</p>
+            <p class="mr_lbl">Night</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <filter id="Ellipse_43" x="0" y="0" width="36" height="36" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="#1f8ced" flood-opacity="0.502"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Smily" transform="translate(-194.5 -771.5)">
+    <g transform="matrix(1, 0, 0, 1, 194.5, 771.5)" filter="url(#Ellipse_43)">
+      <circle id="Ellipse_43-2" data-name="Ellipse 43" cx="13.5" cy="13.5" r="13.5" transform="translate(4.5 4.5)" fill="#fff"/>
+    </g>
+    <path id="Icon_awesome-smile" data-name="Icon awesome-smile" d="M10.8.563a10.8,10.8,0,1,0,10.8,10.8A10.8,10.8,0,0,0,10.8.563ZM14.287,7.88a1.394,1.394,0,1,1-1.394,1.394A1.392,1.392,0,0,1,14.287,7.88Zm-6.969,0A1.394,1.394,0,1,1,5.924,9.274,1.392,1.392,0,0,1,7.318,7.88ZM15.8,15.293a6.507,6.507,0,0,1-10,0A.7.7,0,0,1,6.873,14.4a5.118,5.118,0,0,0,7.858,0A.7.7,0,0,1,15.8,15.293Z" transform="translate(201.987 778.438)" fill="#ffb83d"/>
+  </g>
+</svg>

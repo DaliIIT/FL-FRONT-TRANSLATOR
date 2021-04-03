@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>notification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+  <h3 class="info_lbl ion-padding-start">26,Nov 2019</h3>
+  <div class="today_div">
+    <ion-item *ngFor="let item of today" lines="full" mode="md">
+      <ion-avatar slot="start">
+        <img [src]="item?.img">
+
+      </ion-avatar>
+      <ion-label>
+        <h3 class="name">{{item?.name}} <span class="ion-float-right">{{item?.ago}}</span></h3>
+        <p class="detail">{{item?.detail}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+  <h3 class="info_lbl ion-padding-start">25,Nov 2019</h3>
+  <div class="today_div">
+    <ion-item *ngFor="let item of yesterday" lines="full" mode="md">
+      <ion-avatar slot="start">
+        <img [src]="item?.img">
+      </ion-avatar>
+      <ion-label>
+        <h3 class="name">{{item?.name}} <span class="ion-float-right">{{item?.ago}}</span></h3>
+        <p class="detail">{{item?.detail}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

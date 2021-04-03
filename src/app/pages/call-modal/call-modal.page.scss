@@ -1,0 +1,47 @@
+ion-content {
+  --background: rgba(255, 255, 255, 0.9);
+  .profie_div {
+    text-align: center;
+    padding-top: 30px;
+    img {
+      height: 115px;
+      width: 115px;
+      border-radius: 50%;
+      border: solid 5px var(--my_theme);
+      margin-bottom: 10px;
+    }
+    .name {
+      font-size: 20px;
+      color: var(--my_theme);
+      font-family: "sf_ui_md";
+      margin: 0;
+    }
+    .ring_lbl {
+      font-size: 18px;
+      color: var(--blue);
+      font-family: "sf_ui_md_i";
+    }
+  }
+  .btn_div {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 32vh;
+    ion-button {
+      height: 61px;
+      width: 61px;
+      --border-radius: 50%;
+      --padding-start: 0;
+      --padding-end: 0;
+      ion-icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+    .call_btn {
+      --background: var(--green);
+    }
+    .end_btn {
+      --background: var(--red);
+    }
+  }
+}
