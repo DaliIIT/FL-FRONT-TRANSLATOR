@@ -1,30 +1,46 @@
-import { Component, OnInit } from "@angular/core";
-import { NavController, MenuController } from "@ionic/angular";
-import { ViewChild } from "@angular/core";
+import {Component, OnInit} from '@angular/core';
+import {MenuController, NavController} from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from 'src/app/core/services/auth/auth-service.service';
 
 @Component({
-  selector: "app-signin",
-  templateUrl: "./signin.page.html",
-  styleUrls: ["./signin.page.scss"],
+    selector: 'app-signin',
+    templateUrl: './signin.page.html',
+    styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  @ViewChild("input", { static: true }) myInput;
-  data: any = {};
-  constructor(private nav: NavController, private menu: MenuController) {
-    this.menu.enable(false);
-  }
+    loginForm: FormGroup;
+    error = '';
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.myInput.setFocus();
-    }, 150);
-  }
+    constructor(private nav: NavController,
+                private menu: MenuController,
+                private fb: FormBuilder,
+                private auth: AuthService) {
+        this.menu.enable(false);
+    }
 
-  forgotPassword() {}
-  signUp() {
-    this.nav.navigateForward("/signup");
-  }
-  login() {
-    this.nav.navigateRoot("/home");
-  }
+    ngOnInit() {
+        this.loginForm = this.fb.group({
+            username: this.fb.control('', [Validators.required]),
+            password: this.fb.control('', [Validators.required])
+        });
+    }
+
+    forgotPassword() {
+    }
+
+    signUp() {
+        this.nav.navigateForward('/signup');
+    }
+
+    login() {
+        const formValue = this.loginForm.value;
+        this.auth.login(formValue).subscribe(result => {
+            if (!result.error) {
+                this.nav.navigateRoot('/home');
+                this.loginForm.reset();
+            }
+            this.error = result.error === 'invalid_grant' ? 'Incorrect username or password' : '';
+        });
+    }
 }

@@ -1,27 +1,33 @@
 <ion-content>
-  <div class="content-section">
-    <h3 class="ion-text-center title">Welcome</h3>
-    <p class="ion-text-center simple_lbl">Login to your account</p>
-    <form>
-      <ion-input class="email-input genral_input" #input name="email" autofocus="true" placeholder="Email" type="email"
-        [(ngModel)]="data.email">
-      </ion-input>
+  <div class="center">
+    <div class="content-section elevation-8">
+      <h3 class="ion-text-center title">Welcome</h3>
+      <p class="ion-text-center simple_lbl">Login to your account</p>
+      <form [formGroup]="loginForm">
+        <div class="ion-text-center alert-warning">{{error}}</div>
+        <ion-input #input autofocus="true" class="email-input genral_input" formControlName="username"
+                   placeholder="Username"
+                   type="text">
+        </ion-input>
 
-      <ion-input class="email-input genral_input" placeholder="Password" name="password" type="password"
-        [(ngModel)]="data.password">
-      </ion-input>
+        <ion-input class="email-input genral_input" formControlName="password" placeholder="Password"
+                   type="password">
+        </ion-input>
 
-      <ion-button class="btn-login ion-text-capitalize" mode="md" fill="solid" (click)="login()">
-        Sign in
+        <ion-button (click)="login()" [disabled]="loginForm.invalid" class="btn-login ion-text-capitalize" fill="solid"
+                    mode="md">
+          Sign in
+        </ion-button>
+      </form>
+      <ion-button (click)="forgotPassword()" class="transparent_btn btn_forgot" expand="full">
+        Forgot your password?
       </ion-button>
-    </form>
-    <ion-button class="transparent_btn btn_forgot" expand="full" (click)="forgotPassword()">
-      Forgot your password?
-    </ion-button>
 
-    <p class="ion-text-center account-text">Don’t have an account? <ion-button class="transparent_btn"
-        (click)="signUp()">Sign up
-      </ion-button>
-    </p>
+      <p class="ion-text-center account-text">Don’t have an account?
+        <ion-button (click)="signUp()"
+                    class="transparent_btn">Sign up
+        </ion-button>
+      </p>
+    </div>
   </div>
 </ion-content>
