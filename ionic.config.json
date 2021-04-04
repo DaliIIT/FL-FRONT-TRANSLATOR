@@ -1,7 +1,8 @@
 {
   "name": "doctroadmin",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
