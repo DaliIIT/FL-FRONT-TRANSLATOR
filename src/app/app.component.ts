@@ -1,20 +1,14 @@
-import { Routes, Router } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import {Router} from '@angular/router';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 
-import {
-  Platform,
-  MenuController,
-  NavController,
-  ToastController,
-} from "@ionic/angular";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { StatusBar } from "@ionic-native/status-bar/ngx";
-import { IonRouterOutlet } from "@ionic/angular";
-import { QueryList, ViewChildren } from "@angular/core";
+import {IonRouterOutlet, MenuController, NavController, Platform, ToastController,} from '@ionic/angular';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+
 @Component({
-  selector: "app-root",
-  templateUrl: "app.component.html",
-  styleUrls: ["app.component.scss"],
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
@@ -67,7 +61,7 @@ export class AppComponent implements OnInit {
   ) {
     this.initializeApp();
     this.backButtonEvent();
-    this.nav.navigateRoot("/home");
+    // this.nav.navigateRoot("/home");
   }
 
   initializeApp() {
