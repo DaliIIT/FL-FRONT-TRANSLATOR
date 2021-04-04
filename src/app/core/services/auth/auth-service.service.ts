@@ -82,7 +82,7 @@ export class AuthService {
     }
 
     getJwtToken(): Observable<string> {
-        return from(this.nativeStorage.getItem(JWT_TOKEN));
+        return from(this.nativeStorage.getItem(JWT_TOKEN)).pipe(catchError(() => of(null)));
     }
 
     getClaims(): Observable<string[]> {
