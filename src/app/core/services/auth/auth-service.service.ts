@@ -25,7 +25,7 @@ export class AuthService {
 
     get authBasic() {
         const headers = {
-            Authorization: 'Basic ' + btoa('my-trusted-client:secret'),
+            Authorization: 'Basic ' + btoa('my-trusted-client:clientsecret'),
             'Content-type': 'application/x-www-form-urlencoded',
         };
         return headers;

@@ -1,30 +1,38 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="md">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" icon="chevron-back-outline" text="" mode="md"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar mode="md">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home" icon="chevron-back-outline" text="" mode="md"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding-horizontal">
-  <h3 class="main_lbl">Create an Account</h3>
-  <form>
-    <ion-input class="genral_input" name="email" placeholder="Doctor name" type="text" autofocus #input></ion-input>
-    <ion-input class="genral_input" name="email" placeholder="Email address" type="email"></ion-input>
-    <ion-input class="genral_input" name="email" placeholder="Phone number" type="tel"></ion-input>
-    <ion-input class="genral_input" name="email" placeholder="Date of Birth" type="text"></ion-input>
-    <ion-input class="genral_input" name="email" placeholder="Gender" type="text"></ion-input>
-    <ion-input class="genral_input" name="email" placeholder="Password" type="password"></ion-input>
-  </form>
+    <h3 class="main_lbl">Create an Account</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-input class="genral_input" formControlName="companyName" placeholder="Company Name" type="text" autofocus
+                   #input></ion-input>
+        <ion-input class="genral_input" formControlName="fullName" placeholder="Full Name" type="text"></ion-input>
+        <ion-input class="genral_input" formControlName="birthday" placeholder="Birthday" type="date"></ion-input>
+        <ion-input class="genral_input" formControlName="position" placeholder="Position" type="text"></ion-input>
+        <ion-select class="genral_input" formControlName="languages" multiple="true" placeholder="Select languages">
+            <ion-select-option *ngFor="let langage of langages" value="{{langage}}">{{langage}}</ion-select-option>
+        </ion-select>
+        <ion-input class="genral_input" formControlName="email" placeholder="Email" type="email"></ion-input>
+        <ion-input class="genral_input" formControlName="password" placeholder="Password" type="password"></ion-input>
+        <ion-input class="genral_input" formControlName="confirmPassword" placeholder="Confirm Password"
+                   type="password"></ion-input>
 
-  <ion-button class="btn-login" mode="md" (click)="uploadDocument()">
-    Sign up
-  </ion-button>
-  <p class="term_lbl">By continuing Sign up you agree to the following
-    Terms & Conditions without reservation.</p>
-  <p class="ion-text-center account-text">Already have an account? <ion-button class="transparent_btn"
-      (click)="login()">
-      Sign in
-    </ion-button>
-  </p>
+
+        <ion-button type="submit" class="btn-login" mode="md">
+            Sign up
+        </ion-button>
+    </form>
+    <p class="term_lbl">By continuing Sign up you agree to the following
+        Terms & Conditions without reservation.</p>
+    <p class="ion-text-center account-text">Already have an account?
+        <ion-button class="transparent_btn"
+                    (click)="login()">
+            Sign in
+        </ion-button>
+    </p>
 </ion-content>
