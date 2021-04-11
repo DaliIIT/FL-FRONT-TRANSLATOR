@@ -9,6 +9,10 @@
 <ion-content class="ion-padding-horizontal">
     <h3 class="main_lbl">Create an Account</h3>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-select class="genral_input" formControlName="type" placeholder="Select type">
+            <ion-select-option value="Translator">Translator</ion-select-option>
+            <ion-select-option value="Client">Client</ion-select-option>
+        </ion-select>
         <ion-input class="genral_input" formControlName="companyName" placeholder="Company Name" type="text" autofocus
                    #input></ion-input>
         <ion-input class="genral_input" formControlName="fullName" placeholder="Full Name" type="text"></ion-input>
@@ -17,7 +21,7 @@
         <ion-select class="genral_input" formControlName="languages" multiple="true" placeholder="Select languages">
             <ion-select-option *ngFor="let langage of langages" value="{{langage}}">{{langage}}</ion-select-option>
         </ion-select>
-        <ion-input class="genral_input" formControlName="email" placeholder="Email" type="email"></ion-input>
+        <ion-input class="genral_input" formControlName="username" placeholder="Email" type="email"></ion-input>
         <ion-input class="genral_input" formControlName="password" placeholder="Password" type="password"></ion-input>
         <ion-input class="genral_input" formControlName="confirmPassword" placeholder="Confirm Password"
                    type="password"></ion-input>

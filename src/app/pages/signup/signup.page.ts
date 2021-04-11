@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuController, NavController} from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RegisterService} from '../../core/services/register-service';
+import {Language} from '../../core/models/Language';
+import {User} from '../../core/models/User';
 
 @Component({
     selector: 'app-signup',
@@ -15,7 +18,8 @@ export class SignupPage implements OnInit {
         'Farsi/Persisch', 'Franzosisch', 'Kurdisch Kurmanci', 'Polnisch', 'Rumanisch', 'Russisch', 'Slowakisch', 'Tschechisch',
         'Tukisch', 'Ungarisch', 'Italian', 'Greek', 'Spanish', 'Portuguese'];
 
-    constructor(private nav: NavController, private menu: MenuController, private formBuilder: FormBuilder) {
+    constructor(private nav: NavController, private menu: MenuController, private formBuilder: FormBuilder,
+                private registerService: RegisterService) {
         this.menu.enable(false);
     }
 
@@ -25,12 +29,13 @@ export class SignupPage implements OnInit {
         }, 150);
 
         this.registerForm = this.formBuilder.group({
+            type: ['', Validators.required],
             companyName: ['', Validators.required],
             fullName: ['', Validators.required],
             birthday: ['', Validators.required],
             position: ['', [Validators.required]],
             languages: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
+            username: ['', [Validators.required, Validators.email]],
             password: [false, Validators.required],
             confirmPassword: [false, Validators.required]
         }, {
@@ -67,7 +72,34 @@ export class SignupPage implements OnInit {
 
     onSubmit() {
         if (this.registerForm.valid) {
-            console.log(this.registerForm.value);
+            const languages: Language[] = this.registerForm.get('languages').value.map(value => ({name: value}));
+            const user: User = {
+                id: null,
+
+                roles: null,
+
+                username: this.registerForm.get('username').value,
+
+                password: this.registerForm.get('password').value,
+
+                birthDay: this.registerForm.get('birthday').value,
+
+                companyName: this.registerForm.get('companyName').value,
+
+                position: this.registerForm.get('position').value,
+
+                fullName: this.registerForm.get('fullName').value,
+
+                languages: languages
+            };
+            switch (this.registerForm.get('type').value) {
+                case 'Translator':
+                    this.registerService.registerTranslator(user).subscribe(value => this.nav.navigateRoot('/signin'));
+                    break;
+                case 'Client':
+                    this.registerService.registerClient(user).subscribe(value => this.nav.navigateRoot('/signin'));
+                    break;
+            }
         }
     }
 }

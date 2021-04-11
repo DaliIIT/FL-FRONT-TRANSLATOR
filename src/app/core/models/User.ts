@@ -1,20 +1,23 @@
 import {Role} from './Role';
+import {Language} from './Language';
 
 export class User {
 
     id: number;
 
-    userName: string;
+    username: string;
 
     password: string;
 
     roles: Role[];
 
-    birthDay: Date;
+    birthDay: string;
 
-    organizationName: string;
+    companyName: string;
 
-    position: number;
+    fullName: string;
 
-    languages: string[];
+    position: string;
+
+    languages: Language[];
 }
