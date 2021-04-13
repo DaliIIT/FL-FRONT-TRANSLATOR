@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {SignupPageRoutingModule} from 'src/app/pages/auth/signup/signup-routing.module';
 
 import {SignupPage} from 'src/app/pages/auth/signup/signup.page';
+import {CoreModule} from 'src/app/core/core.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {SignupPage} from 'src/app/pages/auth/signup/signup.page';
         FormsModule,
         IonicModule,
         SignupPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CoreModule
     ],
     declarations: [SignupPage]
 })

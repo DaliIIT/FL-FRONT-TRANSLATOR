@@ -8,29 +8,27 @@
 
 <ion-content class="ion-padding-horizontal">
     <h3 class="main_lbl">Create an Account</h3>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <ion-select class="genral_input" formControlName="type" placeholder="Select type">
-            <ion-select-option value="Translator">Translator</ion-select-option>
-            <ion-select-option value="Client">Client</ion-select-option>
-        </ion-select>
-        <ion-input class="genral_input" formControlName="companyName" placeholder="Company Name" type="text" autofocus
-                   #input></ion-input>
-        <ion-input class="genral_input" formControlName="fullName" placeholder="Full Name" type="text"></ion-input>
-        <ion-input class="genral_input" formControlName="birthday" placeholder="Birthday" type="date"></ion-input>
-        <ion-input class="genral_input" formControlName="position" placeholder="Position" type="text"></ion-input>
-        <ion-select class="genral_input" formControlName="languages" multiple="true" placeholder="Select languages">
-            <ion-select-option *ngFor="let langage of langages" value="{{langage}}">{{langage}}</ion-select-option>
-        </ion-select>
-        <ion-input class="genral_input" formControlName="username" placeholder="Email" type="email"></ion-input>
-        <ion-input class="genral_input" formControlName="password" placeholder="Password" type="password"></ion-input>
-        <ion-input class="genral_input" formControlName="confirmPassword" placeholder="Confirm Password"
-                   type="password"></ion-input>
-
-
-        <ion-button type="submit" class="btn-login" mode="md">
-            Sign up
-        </ion-button>
+    <form [formGroup]="signinForm">
+        <div class="ion-text-center alert-warning mb-1">{{error ||
+        usernameControl?.errors?.userExists ? 'Username already exists' : ''
+            }}</div>
+        <ion-input autofocus class="genral_input" formControlName="username" placeholder="Username*"
+                   type="text"></ion-input>
+        <ion-input class="genral_input" formControlName="password" placeholder="Password*" type="password"></ion-input>
+        <ion-input class="genral_input" formControlName="firstname" placeholder="Firstname" type="text"></ion-input>
+        <ion-input class="genral_input" formControlName="lastname" placeholder="Lastname" type="email"></ion-input>
+        <app-date-picker class="genral_input" formControlName="dateOfBirth" placeholder="Birthday"></app-date-picker>
+        <ion-input class="genral_input" formControlName="gender" placeholder="Gender" type="password"></ion-input>
+        <app-select [values]="[
+    {value : 'MALE', display: 'Male'},
+    {value : 'FEMALE', display: 'Female'},
+    {value : 'OTHER', display: 'Other'}
+    ]" class="genral_input" formControlName="gender" placeholder="Gender"></app-select>
     </form>
+
+    <ion-button (click)="signUp()" [disabled]="signinForm.invalid" class="btn-login" mode="md">
+        Sign up
+    </ion-button>
     <p class="term_lbl">By continuing Sign up you agree to the following
         Terms & Conditions without reservation.</p>
     <p class="ion-text-center account-text">Already have an account?
