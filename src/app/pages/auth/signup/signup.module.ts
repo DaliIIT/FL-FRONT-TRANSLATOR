@@ -4,9 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {SignupPageRoutingModule} from './signup-routing.module';
+import {SignupPageRoutingModule} from 'src/app/pages/auth/signup/signup-routing.module';
 
-import {SignupPage} from './signup.page';
+import {SignupPage} from 'src/app/pages/auth/signup/signup.page';
 
 @NgModule({
     imports: [

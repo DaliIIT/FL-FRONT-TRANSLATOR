@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuController, NavController} from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RegisterService} from '../../core/services/register-service';
-import {Language} from '../../core/models/Language';
-import {User} from '../../core/models/User';
+import {RegisterService} from 'src/app/core/services/register-service';
+import {Language} from 'src/app/core/models/Language';
+import {User} from 'src/app/core/models/User';
 
 @Component({
     selector: 'app-signup',
@@ -44,7 +44,7 @@ export class SignupPage implements OnInit {
     }
 
     login() {
-        this.nav.navigateRoot('/signin');
+        this.nav.navigateRoot('/auth/signin');
     }
 
     uploadDocument() {
@@ -94,10 +94,10 @@ export class SignupPage implements OnInit {
             };
             switch (this.registerForm.get('type').value) {
                 case 'Translator':
-                    this.registerService.registerTranslator(user).subscribe(value => this.nav.navigateRoot('/signin'));
+                    this.registerService.registerTranslator(user).subscribe(value => this.nav.navigateRoot('/auth/signin'));
                     break;
                 case 'Client':
-                    this.registerService.registerClient(user).subscribe(value => this.nav.navigateRoot('/signin'));
+                    this.registerService.registerClient(user).subscribe(value => this.nav.navigateRoot('/auth/signin'));
                     break;
             }
         }
