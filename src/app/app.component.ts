@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
   }
   logout() {
     this.menu.close();
-    this.nav.navigateRoot("/signin");
+    this.nav.navigateRoot('/auth/signin');
   }
   editProfile() {}
   backButtonEvent() {
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
           outlet.pop();
         } else if (
           this.router.url === "/home" ||
-          this.router.url === "/signin"
+            this.router.url === '/auth/signin'
         ) {
           if (
             new Date().getTime() - this.lastTimeBackPress <

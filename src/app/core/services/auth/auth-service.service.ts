@@ -3,19 +3,19 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {from, Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {catchError, map, mapTo, tap} from 'rxjs/operators';
+import {catchError, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {Tokens} from 'src/app/core/models/Tokens';
 import {LoginError} from 'src/app/core/models/LoginError';
 
-const JWT_TOKEN = 'JWT_TOKEN';
+const ACCESS_TOKEN = 'ACCESS_TOKEN';
+const REFRESH_TOKEN = 'REFRESH_TOKEN';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
     private loggedUser: string;
 
     constructor(private http: HttpClient,
@@ -25,7 +25,7 @@ export class AuthService {
 
     get authBasic() {
         const headers = {
-            Authorization: 'Basic ' + btoa('my-trusted-client:secret'),
+            Authorization: 'Basic ' + btoa('translatorapp:clientsecret'),
             'Content-type': 'application/x-www-form-urlencoded',
         };
         return headers;
@@ -51,19 +51,17 @@ export class AuthService {
 
     logout() {
         this.router.navigate(['/auth/login']);
-        const body = new HttpParams()
-            .set('refreshToken', this.getRefreshToken());
-        return this.http.post<any>(`
-        ${environment.authUrl}/user/public/logout`,
-            body,
-            {headers: {'Content-type': 'application/x-www-form-urlencoded'}}
-        )
-            .pipe(
-                tap(() => this.doLogoutUser()),
-                mapTo(true),
-                catchError(error => {
-                    return of(false);
-                }));
+        return this.getRefreshToken().pipe(map(refreshToken => new HttpParams()
+                .set('refreshToken', refreshToken)),
+            switchMap(body => this.http.post<any>(`${environment.authUrl}/user/public/logout`,
+                body,
+                {headers: {'Content-type': 'application/x-www-form-urlencoded'}}
+            )),
+            tap(() => this.doLogoutUser()),
+            mapTo(true),
+            catchError(error => {
+                return of(false);
+            }));
     }
 
     isLoggedIn() {
@@ -71,18 +69,19 @@ export class AuthService {
     }
 
     refreshToken() {
-        const body = new HttpParams()
-            .set('grant_type', 'refresh_token')
-            .set('refresh_token', this.getRefreshToken());
         const headers = this.authBasic;
-        return this.http.post<any>(`${environment.authUrl}/oauth/token`, body, {headers}).pipe(
+        return this.getRefreshToken().pipe(map(refreshToken => new HttpParams()
+                .set('grant_type', 'refresh_token')
+                .set('refresh_token', refreshToken)),
+            switchMap(body => this.http.post<any>(`${environment.authUrl}/oauth/token`, body, {headers})),
             tap((tokens: Tokens) => {
-                this.storeJwtToken(tokens.access_token);
-            }));
+                this.storeAccessToken(tokens.access_token);
+            })
+        );
     }
 
     getJwtToken(): Observable<string> {
-        return from(this.nativeStorage.getItem(JWT_TOKEN)).pipe(catchError(() => of(null)));
+        return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
     }
 
     getClaims(): Observable<string[]> {
@@ -104,11 +103,19 @@ export class AuthService {
     }
 
     private getRefreshToken() {
-        return localStorage.getItem(this.REFRESH_TOKEN);
+        return from(this.nativeStorage.getItem(REFRESH_TOKEN)).pipe(catchError(err => of(null)));
     }
 
-    private storeJwtToken(jwt: string) {
-        this.nativeStorage.setItem(JWT_TOKEN, jwt)
+    private storeAccessToken(jwt: string) {
+        this.nativeStorage.setItem(ACCESS_TOKEN, jwt)
+            .then(
+                () => console.log('Stored item!'),
+                error => console.error('Error storing item', error)
+            );
+    }
+
+    private storeRefreshToken(jwt: string) {
+        this.nativeStorage.setItem(REFRESH_TOKEN, jwt)
             .then(
                 () => console.log('Stored item!'),
                 error => console.error('Error storing item', error)
@@ -116,11 +123,16 @@ export class AuthService {
     }
 
     private storeTokens(token: Tokens) {
-        this.storeJwtToken(token.access_token);
+        this.storeAccessToken(token.access_token);
+        this.storeRefreshToken(token.refresh_token);
     }
 
     private removeTokens() {
-        this.nativeStorage.remove(JWT_TOKEN).then(
+        this.nativeStorage.remove(ACCESS_TOKEN).then(
+            () => console.log('removed item!'),
+            error => console.error('Error removing item', error)
+        );
+        this.nativeStorage.remove(REFRESH_TOKEN).then(
             () => console.log('removed item!'),
             error => console.error('Error removing item', error)
         );

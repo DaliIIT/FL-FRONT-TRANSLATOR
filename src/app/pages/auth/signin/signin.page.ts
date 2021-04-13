@@ -30,7 +30,7 @@ export class SigninPage implements OnInit {
     }
 
     signUp() {
-        this.nav.navigateForward('/signup');
+        this.nav.navigateForward('/auth/signup');
     }
 
     login() {
