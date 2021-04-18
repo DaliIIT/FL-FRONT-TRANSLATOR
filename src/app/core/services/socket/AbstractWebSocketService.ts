@@ -69,7 +69,7 @@ export abstract class AbstractWebSocketService {
      * Connect and activate the client to the broker.
      */
     private connect = () => {
-        this.authService.getJwtToken$().subscribe(token => {
+        this.authService.getValidJwtTokenOrRefresh$().subscribe(token => {
             const config = {
                 ...this.stompConfig, connectHeaders: {
                     Authorization: `Bearer ${token}`
@@ -86,7 +86,7 @@ export abstract class AbstractWebSocketService {
      * On each connect / reconnect, we subscribe all broker clients.
      */
     private onSocketConnect = frame => {
-        this.authService.getJwtToken$().subscribe(token => {
+        this.authService.getValidJwtTokenOrRefresh$().subscribe(token => {
             this.stompService.stompClient.subscribe(this.options.brokerEndpoint, this.socketListener, {
                 Authorization: `Bearer ${token}`
             });
