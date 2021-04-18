@@ -14,6 +14,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
+import {RxStompService} from '@stomp/ng2-stompjs';
 
 @NgModule({
     declarations: [AppComponent],
@@ -31,6 +32,7 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
         NativeStorage,
         StatusBar,
         SplashScreen,
+        RxStompService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],

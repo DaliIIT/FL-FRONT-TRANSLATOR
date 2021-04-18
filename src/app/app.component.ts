@@ -4,6 +4,7 @@ import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {IonRouterOutlet, MenuController, NavController, Platform, ToastController,} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {ActivitySocketService} from '@core/services/socket/activity-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -57,7 +58,8 @@ export class AppComponent implements OnInit {
     private menu: MenuController,
     private nav: NavController,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private activitySocketService: ActivitySocketService
   ) {
     this.initializeApp();
     this.backButtonEvent();
@@ -72,6 +74,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activitySocketService.getObservable().subscribe(value => console.log(value));
     const path = window.location.pathname.split("folder/")[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(

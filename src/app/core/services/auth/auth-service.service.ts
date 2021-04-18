@@ -19,8 +19,7 @@ export class AuthService {
     private loggedUser: string;
 
     constructor(private http: HttpClient,
-                private router: Router,
-                private nativeStorage: NativeStorage) {
+                private router: Router) {
     }
 
     get authBasic() {
@@ -80,16 +79,25 @@ export class AuthService {
         );
     }
 
-    getJwtToken(): Observable<string> {
-        return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
+    getJwtToken$() {
+        return of(localStorage.getItem(ACCESS_TOKEN));
+        // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
+    }
+    getJwtToken(): string {
+        return localStorage.getItem(ACCESS_TOKEN);
+        // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
     }
 
-    getClaims(): Observable<string[]> {
-        return this.getJwtToken().pipe(map(jwt_decode), map((decoded: any) => decoded.authorities ? decoded.authorities : []));
+    getClaims(): string[] {
+        const authorities = jwt_decode(this.getJwtToken()).authorities;
+        return authorities || [];
+        // return this.getJwtToken().pipe(map(jwt_decode), map((decoded: any) => decoded.authorities ? decoded.authorities : []));
     }
 
-    getUserName(): Observable<string> {
-        return this.getJwtToken().pipe(map(jwt_decode), map((decoded: any) => decoded.user_name));
+    getUserName(): string {
+        const userName = jwt_decode(this.getJwtToken()).user_name;
+        return userName;
+        // return this.getJwtToken().pipe(map(jwt_decode), map((decoded: any) => decoded.user_name));
     }
 
     private doLoginUser(username: string, token: Tokens) {
@@ -103,23 +111,28 @@ export class AuthService {
     }
 
     private getRefreshToken() {
-        return from(this.nativeStorage.getItem(REFRESH_TOKEN)).pipe(catchError(err => of(null)));
+        return of(localStorage.getItem(REFRESH_TOKEN));
+        // return from(this.nativeStorage.getItem(REFRESH_TOKEN)).pipe(catchError(err => of(null)));
     }
 
     private storeAccessToken(jwt: string) {
-        this.nativeStorage.setItem(ACCESS_TOKEN, jwt)
-            .then(
-                () => console.log('Stored item!'),
-                error => console.error('Error storing item', error)
-            );
+        // TODO use ionic storage
+        localStorage.setItem(ACCESS_TOKEN, jwt);
+        // this.nativeStorage.setItem(ACCESS_TOKEN, jwt)
+        //     .then(
+        //         () => console.log('Stored item!'),
+        //         error => console.error('Error storing item', error)
+        //     );
     }
 
     private storeRefreshToken(jwt: string) {
-        this.nativeStorage.setItem(REFRESH_TOKEN, jwt)
-            .then(
-                () => console.log('Stored item!'),
-                error => console.error('Error storing item', error)
-            );
+        localStorage.setItem(REFRESH_TOKEN, jwt);
+
+        // this.nativeStorage.setItem(REFRESH_TOKEN, jwt)
+        //     .then(
+        //         () => console.log('Stored item!'),
+        //         error => console.error('Error storing item', error)
+        //     );
     }
 
     private storeTokens(token: Tokens) {
@@ -128,14 +141,16 @@ export class AuthService {
     }
 
     private removeTokens() {
-        this.nativeStorage.remove(ACCESS_TOKEN).then(
-            () => console.log('removed item!'),
-            error => console.error('Error removing item', error)
-        );
-        this.nativeStorage.remove(REFRESH_TOKEN).then(
-            () => console.log('removed item!'),
-            error => console.error('Error removing item', error)
-        );
+        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(REFRESH_TOKEN);
+        // this.nativeStorage.remove(ACCESS_TOKEN).then(
+        //     () => console.log('removed item!'),
+        //     error => console.error('Error removing item', error)
+        // );
+        // this.nativeStorage.remove(REFRESH_TOKEN).then(
+        //     () => console.log('removed item!'),
+        //     error => console.error('Error removing item', error)
+        // );
     }
 
 }
