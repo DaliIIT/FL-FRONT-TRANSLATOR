@@ -18,7 +18,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // @ts-ignore
-    return this.authService.getJwtToken$().pipe(
+    return this.authService.getValidJwtTokenOrRefresh$().pipe(
         map(token => token ? this.addToken(request, token) : request),
         switchMap(rq => next.handle(request).pipe(catchError(error => {
           if (error instanceof HttpErrorResponse && error.status === 401) {

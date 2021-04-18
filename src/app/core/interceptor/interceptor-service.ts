@@ -17,7 +17,7 @@ export class InterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return this.auth.getJwtToken$().pipe(
+        return this.auth.getValidJwtTokenOrRefresh$().pipe(
             map(token => {
                 if (!token) {
                     this.router.navigate(['/login']);

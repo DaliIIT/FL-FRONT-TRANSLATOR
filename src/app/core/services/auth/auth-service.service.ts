@@ -17,6 +17,7 @@ const REFRESH_TOKEN = 'REFRESH_TOKEN';
 })
 export class AuthService {
     private loggedUser: string;
+    private validUntil: Date;
 
     constructor(private http: HttpClient,
                 private router: Router) {
@@ -79,10 +80,14 @@ export class AuthService {
         );
     }
 
-    getJwtToken$() {
+    getValidJwtTokenOrRefresh$() {
+        if (this.getJwtToken() && this.validUntil.getTime() <= Date.now()) {
+           return  this.refreshToken().pipe(map((token: Tokens) => token.access_token));
+        }
         return of(localStorage.getItem(ACCESS_TOKEN));
         // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
     }
+
     getJwtToken(): string {
         return localStorage.getItem(ACCESS_TOKEN);
         // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
@@ -101,6 +106,7 @@ export class AuthService {
     }
 
     private doLoginUser(username: string, token: Tokens) {
+        this.validUntil = new Date(new Date().getTime() + token.expires_in * 1000);
         this.loggedUser = username;
         this.storeTokens(token);
     }
