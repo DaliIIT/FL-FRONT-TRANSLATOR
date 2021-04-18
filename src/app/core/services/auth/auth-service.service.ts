@@ -17,7 +17,7 @@ const REFRESH_TOKEN = 'REFRESH_TOKEN';
 })
 export class AuthService {
     private loggedUser: string;
-    private validUntil: Date;
+    private validUntil: Date = new Date();
 
     constructor(private http: HttpClient,
                 private router: Router) {
