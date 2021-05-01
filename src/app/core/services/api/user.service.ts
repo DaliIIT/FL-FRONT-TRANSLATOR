@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
+import {User} from '@core/models/User';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +18,10 @@ export class UserService {
 
     public addClient(value) {
         return this.http.post(`${environment.authUrl}/user/add/client`, this.clean(value));
+    }
+
+    public getAll(): Observable<User[]> {
+        return this.http.get<User[]>(`${environment.authUrl}/user/all`);
     }
 
     clean(obj) {

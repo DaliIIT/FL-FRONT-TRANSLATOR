@@ -3,7 +3,7 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {AuthService} from '../services/auth/auth-service.service';
 import {Router} from '@angular/router';
-import {catchError, filter, map, switchMap, take} from 'rxjs/operators';
+import {catchError, filter, map, switchMap, take, tap} from 'rxjs/operators';
 import {Tokens} from 'src/app/core/models/Tokens';
 
 @Injectable({
@@ -17,23 +17,27 @@ export class InterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return this.auth.getValidJwtTokenOrRefresh$().pipe(
-            map(token => {
-                if (!token) {
-                    this.router.navigate(['/login']);
-                    this.auth.logout();
-                }
-                req = this.addToken(req, token);
-                return req;
-            }),
-            switchMap(request => next.handle(request).pipe(catchError(err => {
-                if (err instanceof HttpErrorResponse && err.status === 401 &&
-                    !request.url.includes('logout')) {
-                    return this.handle401Error(request, next);
-                }
-                return throwError(err);
-            })))
-        );
+        if (!req.url.includes('token')) {
+            return this.auth.getValidJwtTokenOrRefresh$().pipe(
+                tap(x => console.log(x)),
+                map(token => {
+                    if (!token) {
+                        this.router.navigate(['/auth/signin']);
+                        this.auth.logout();
+                    }
+                    req = this.addToken(req, token);
+                    return req;
+                }),
+                switchMap(request => next.handle(request).pipe(catchError(err => {
+                    if (err instanceof HttpErrorResponse && err.status === 401 &&
+                        !request.url.includes('logout')) {
+                        return this.handle401Error(request, next);
+                    }
+                    return throwError(err);
+                })))
+            );
+        }
+        return next.handle(req);
     }
 
     private addToken(request: HttpRequest<any>, token: string) {
