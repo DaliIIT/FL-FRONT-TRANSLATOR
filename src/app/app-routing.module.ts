@@ -87,7 +87,11 @@ const routes: Routes = [
       import('./pages/call-modal/call-modal.module').then(
         (m) => m.CallModalPageModule
       ),
+  },  {
+    path: 'video-call',
+    loadChildren: () => import('./pages/video-call/video-call.module').then( m => m.VideoCallPageModule)
   },
+
 ];
 
 @NgModule({

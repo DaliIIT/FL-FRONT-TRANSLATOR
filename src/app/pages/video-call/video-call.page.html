@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>video-call</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="row">
+    <div class="col text-center">
+      <div>{{peerId}}</div>
+      <div id="video-wrapper">
+        <video #remoteVideo id="remote-video" poster="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202004/whatsapp-1411048_1280.jpeg" autoplay playsinline></video>
+        <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
+  <div class="control">
+    <button [disabled]="isCallStarted$ | async" (click)="showModal(false)">start</button>
+    <button [disabled]="isCallStarted$ | async" (click)="showModal(true)">join</button>
+    <button [disabled]="!(isCallStarted$ | async)" (click)="endCall()">end</button>
+  </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -15,6 +15,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {RxStompService} from '@stomp/ng2-stompjs';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
     declarations: [AppComponent],
@@ -27,6 +28,7 @@ import {RxStompService} from '@stomp/ng2-stompjs';
         AppRoutingModule,
         CallModalPageModule,
         HttpClientModule,
+        NgxPermissionsModule.forRoot()
     ],
     providers: [
         NativeStorage,

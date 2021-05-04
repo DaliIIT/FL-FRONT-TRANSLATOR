@@ -39,7 +39,10 @@
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/peerjs/dist/peerjs.js",
+              "src/assets/js/peerjs.min.js"
+            ]
           },
           "configurations": {
             "production": {
