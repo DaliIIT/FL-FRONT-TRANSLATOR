@@ -1,0 +1,39 @@
+<ion-header class="d-flex justify-content-between align-items-center" style="background: #F8F8F8;height: 80px">
+    <h2 class="app-title pl-4">Translatlly.</h2>
+    <div class="d-inline-flex pr-4">
+        <span class="nav-link">Overview</span>
+        <span class="nav-link">Ondemand translation</span>
+        <span class="nav-link">Set an appointment</span>
+        <span class="nav-link">Logout</span>
+        <img class="div-profile" src="assets/image/patricia.png">
+    </div>
+</ion-header>
+
+<ion-content>
+    <div style="padding: 50px">
+        <div class="mb-3" style="font-weight: bold;font-size: 24px;line-height: 30px;">Ondemand translation</div>
+        <div class="mb-3" style="font-weight: 500;font-size: 18px;line-height: 23px;color: #636363;">Select language
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+            <div class="col-flex-md-5" style="background: #F7F7F7;border-radius: 10px;max-width: 500px;padding:35px">
+                <ion-input class="email-input genral_input"
+                           style="margin-bottom: 36px;background: #FFFFFF;border-radius: 30px;color: #6C6C6C;"
+                           placeholder="Select for a language"
+                           type="text">
+                </ion-input>
+
+                <div class="selected-language d-flex justify-content-between">
+                    <strong>English</strong>
+                    <span>></span>
+                </div>
+                <hr>
+                <div *ngFor="let language of languages">
+                    <span><strong>{{language}}</strong></span>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-flex-md-6" style="background: #F7F7F7;border-radius: 10px;height: 720px">
+            </div>
+        </div>
+    </div>
+</ion-content>

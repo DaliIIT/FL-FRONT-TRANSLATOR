@@ -1,40 +1,85 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar mode="md">
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="home" icon="chevron-back-outline" text="" mode="md"></ion-back-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<ion-content>
+    <div class="d-flex flex-row vh-100 justify-content-start">
+        <div class="col-flex-md-6 pl-0 d-flex justify-content-between">
+            <div class="left-bar"></div>
 
-<ion-content class="ion-padding-horizontal">
-    <h3 class="main_lbl">Create an Account</h3>
-    <form [formGroup]="signinForm">
-        <div class="ion-text-center alert-warning mb-1">{{error ||
-        usernameControl?.errors?.userExists ? 'Username already exists' : ''
-            }}</div>
-        <ion-input autofocus class="genral_input" formControlName="username" placeholder="Username*"
-                   type="text"></ion-input>
-        <ion-input class="genral_input" formControlName="password" placeholder="Password*" type="password"></ion-input>
-        <ion-input class="genral_input" formControlName="firstname" placeholder="Firstname" type="text"></ion-input>
-        <ion-input class="genral_input" formControlName="lastname" placeholder="Lastname" type="email"></ion-input>
-        <app-date-picker class="genral_input" formControlName="dateOfBirth" placeholder="Birthday"></app-date-picker>
-        <ion-input class="genral_input" formControlName="gender" placeholder="Gender" type="password"></ion-input>
-        <app-select [values]="[
-    {value : 'MALE', display: 'Male'},
-    {value : 'FEMALE', display: 'Female'},
-    {value : 'OTHER', display: 'Other'}
-    ]" class="genral_input" formControlName="gender" placeholder="Gender"></app-select>
-    </form>
+            <div style="padding: 20px 50px 30px 45px">
+                <div class="d-flex justify-content-end" style="margin-bottom: 90px;">
+                    <span class="footer-text-color mr-2">Help</span>
+                    <span class="footer-text-color mr-2">settings</span>
+                    <span class="footer-text-color mr-2">imprint</span>
+                    <span class="footer-text-color mr-2">privacy</span>
+                    <span class="footer-text-color">policy</span>
+                </div>
+                <h2 class="app-title">Translatlly.</h2>
+                <p class="app-description mb-5">The worlds leading in-hospital & <span class="text-color">ondimand translation service</span>
+                </p>
+                <div class="d-flex flex-column" style="max-width: 350px">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="login-text">Sign Up</span>
+                        <span (click)="login()" style="color: #818181;">Already signed up?</span>
+                    </div>
+                    <form [formGroup]="signUpForm">
+                        <div class="ion-text-center alert-warning mb-1">{{error ||
+                        usernameControl?.errors?.userExists ? 'Username already exists' : ''}}</div>
+                        <ion-input class="email-input genral_input mb-2" formControlName="companyName"
+                                   placeholder="Company Name" type="text">
+                        </ion-input>
+                        <ion-input class="email-input genral_input mb-2" formControlName="fullName"
+                                   placeholder="Full Name" type="text">
+                        </ion-input>
 
-    <ion-button (click)="signUp()" [disabled]="signinForm.invalid" class="btn-login" mode="md">
-        Sign up
-    </ion-button>
-    <p class="term_lbl">By continuing Sign up you agree to the following
-        Terms & Conditions without reservation.</p>
-    <p class="ion-text-center account-text">Already have an account?
-        <ion-button class="transparent_btn"
-                    (click)="login()">
-            Sign in
-        </ion-button>
-    </p>
+                        <div *ngIf="f.fullName.errors" class="invalid-feedback">
+                            <div *ngIf="f.fullName.errors.required">Title is required</div>
+                        </div>
+                        <ion-input class="email-input genral_input mb-2" formControlName="birthday"
+                                   placeholder="Birthday" type="date">
+                        </ion-input>
+                        <ion-input class="email-input genral_input mb-2" formControlName="position"
+                                   placeholder="Position" type="text">
+                        </ion-input>
+                        <ion-select class="email-input genral_input mb-2" formControlName="languages" multiple="true"
+                                    placeholder="Select languages">
+                            <ion-select-option *ngFor="let langage of langages"
+                                               value="{{langage}}">{{langage}}</ion-select-option>
+                        </ion-select>
+
+                        <div class="d-flex justify-content-around mb-2">
+                            <div class="d-flex justify-content-center">
+                                <ion-checkbox class="mr-3" formControlName="doctor" color="medium"
+                                              slot="start"></ion-checkbox>
+                                <ion-label style="color: #8C8C8C">Doctor</ion-label>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <ion-checkbox class="mr-3" formControlName="translator" color="medium"
+                                              slot="start"></ion-checkbox>
+                                <ion-label style="color: #8C8C8C">Translator</ion-label>
+                            </div>
+                        </div>
+
+
+                        <ion-input class="email-input genral_input mb-2" formControlName="username"
+                                   placeholder="Email" type="text">
+                        </ion-input>
+                        <ion-input class="email-input genral_input mb-2" formControlName="password"
+                                   placeholder="Password" type="password">
+                        </ion-input>
+                        <ion-input class="email-input genral_input mb-2" formControlName="confirmPassword"
+                                   placeholder="Confirm Password" type="password">
+                        </ion-input>
+                        <div class="d-flex align-items-center mb-4">
+                            <ion-checkbox class="mr-3" formControlName="privacy" color="medium"
+                                          slot="start"></ion-checkbox>
+                            <ion-label style="color: #8C8C8C">Privacy Policy</ion-label>
+                        </div>
+
+                    </form>
+                    <button (click)="signUp()" [disabled]="signUpForm.invalid" class="signup-button">Sign Up
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-flex-md-6 image-div-right vh-100"></div>
+    </div>
 </ion-content>

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {from, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {catchError, map, mapTo, switchMap, tap} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
-import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {Tokens} from 'src/app/core/models/Tokens';
 import {LoginError} from 'src/app/core/models/LoginError';
+import {NavController} from '@ionic/angular';
 
 const ACCESS_TOKEN = 'ACCESS_TOKEN';
 const REFRESH_TOKEN = 'REFRESH_TOKEN';
@@ -20,7 +20,8 @@ export class AuthService {
     private validUntil: Date = new Date();
 
     constructor(private http: HttpClient,
-                private router: Router) {
+                private router: Router,
+                private nav: NavController) {
     }
 
     get authBasic() {
@@ -50,7 +51,7 @@ export class AuthService {
     }
 
     logout() {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth/signin']);
         return this.getRefreshToken().pipe(map(refreshToken => new HttpParams()
                 .set('refreshToken', refreshToken)),
             switchMap(body => this.http.post<any>(`${environment.authUrl}/user/public/logout`,
@@ -82,7 +83,7 @@ export class AuthService {
 
     getValidJwtTokenOrRefresh$() {
         if (this.getJwtToken() && this.validUntil.getTime() <= Date.now()) {
-           return  this.refreshToken().pipe(map((token: Tokens) => token.access_token));
+            return this.refreshToken().pipe(map((token: Tokens) => token.access_token));
         }
         return of(localStorage.getItem(ACCESS_TOKEN));
         // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));

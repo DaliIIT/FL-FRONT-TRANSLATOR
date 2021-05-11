@@ -1,40 +1,107 @@
-ion-content {
-  .main_lbl {
-    font-size: 30px;
-    color: var(--blue);
-    font-family: "sf_ui_b";
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 0;
-  }
-  .genral_input {
-    margin-bottom: 20px;
-  }
-  .btn-login {
-    margin-top: 20px;
-  }
-  .term_lbl {
-    font-size: 11px;
-    color: var(--blue);
-    text-align: center;
-    font-family: "sf_ui_r";
-    padding: 0px 5vh;
-  }
-  .account-text {
-    // margin-top: 3vh;
-    margin: 5px 0px 10px 0px;
-    font-size: 14px;
-    font-family: "sf_ui_r";
-    color: var(--blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ion-button {
-      text-transform: none;
-      --color: var(--my_theme);
-      font-family: "sf_ui_b";
-      margin-left: 5px;
-      height: 20px;
-    }
-  }
+//ion-content {
+//  .main_lbl {
+//    font-size: 30px;
+//    color: var(--blue);
+//    font-family: "sf_ui_b";
+//    text-align: center;
+//    margin-bottom: 20px;
+//    margin-top: 0;
+//  }
+//  .genral_input {
+//    margin-bottom: 20px;
+//  }
+//  .btn-login {
+//    margin-top: 20px;
+//  }
+//  .term_lbl {
+//    font-size: 11px;
+//    color: var(--blue);
+//    text-align: center;
+//    font-family: "sf_ui_r";
+//    padding: 0px 5vh;
+//  }
+//  .account-text {
+//    // margin-top: 3vh;
+//    margin: 5px 0px 10px 0px;
+//    font-size: 14px;
+//    font-family: "sf_ui_r";
+//    color: var(--blue);
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    ion-button {
+//      text-transform: none;
+//      --color: var(--my_theme);
+//      font-family: "sf_ui_b";
+//      margin-left: 5px;
+//      height: 20px;
+//    }
+//  }
+//}
+
+.image-div-right {
+  background-image: url("../../../../../src/assets/image/login-image.svg");
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+.app-title {
+
+  width: 121px;
+  height: 30px;
+
+  font-family: Circular, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+
+  color: #483CDC;
+}
+
+.app-description {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+.text-color {
+  color: #483CDC;
+}
+
+.login-text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #1A1A1A;
+}
+
+.left-bar {
+  width: 15px;
+  background: #483CDC;
+  height: 100%;
+}
+
+.email-input {
+  width: 350px;
+  height: 42px;
+
+  background: #F7F7F7;
+  border-radius: 7px;
+  color: #8C8C8C;
+}
+
+.footer-text-color {
+  color: #636363
+}
+
+.signup-button {
+  width: 353px;
+  height: 48px;
+  background-color: #483CDC !important;
+  border-radius: 25px;
+  color: white;
 }

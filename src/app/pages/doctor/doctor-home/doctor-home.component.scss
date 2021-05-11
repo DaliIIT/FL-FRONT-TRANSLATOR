@@ -1,0 +1,36 @@
+.app-title {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+
+  color: #483CDC;
+}
+
+.nav-link {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+
+}
+
+.languages {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.selected-language {
+  background: #483CDC;
+  border-radius: 10px;
+  color: white;
+  height: auto;
+  padding: 17px;
+}
+
+.div-profile {
+  height: 50px;
+  width: 50px;
+  border: solid 5px var(--white);
+  //box-shadow: 0 0 5px 0 rgb(0 135 255 30%);
+  border-radius: 50%;
+}

@@ -1,33 +1,38 @@
 <ion-content>
-  <div class="center">
-    <div class="content-section elevation-8">
-      <h3 class="ion-text-center title">Welcome</h3>
-      <p class="ion-text-center simple_lbl">Login to your account</p>
-      <form [formGroup]="loginForm">
-        <div class="ion-text-center alert-warning">{{error}}</div>
-        <ion-input #input autofocus="true" class="email-input genral_input" formControlName="username"
-                   placeholder="Username"
-                   type="text">
-        </ion-input>
-
-        <ion-input class="email-input genral_input" formControlName="password" placeholder="Password"
-                   type="password">
-        </ion-input>
-
-        <ion-button (click)="login()" [disabled]="loginForm.invalid" class="btn-login ion-text-capitalize" fill="solid"
-                    mode="md">
-          Sign in
-        </ion-button>
-      </form>
-      <ion-button (click)="forgotPassword()" class="transparent_btn btn_forgot" expand="full">
-        Forgot your password?
-      </ion-button>
-
-      <p class="ion-text-center account-text">Don’t have an account?
-        <ion-button (click)="signUp()"
-                    class="transparent_btn">Sign up
-        </ion-button>
-      </p>
+    <div class="d-flex flex-row vh-100 justify-content-start">
+        <div class="col-flex-md-6 pl-0 d-flex justify-content-between">
+            <div class="left-bar"></div>
+            <div style="padding: 120px 100px 30px 45px">
+                <h2 class="app-title">Translatlly.</h2>
+                <p class="app-description mb-5">The worlds leading in-hospital & <span class="text-color">ondimand translation service</span>
+                </p>
+                <div class="d-flex flex-column" style="max-width: 350px">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="login-text">Login</span>
+                        <span (click)="signUp()" class="text-color-grey">dont have an account?</span>
+                    </div>
+                    <form [formGroup]="loginForm">
+                        <div class="ion-text-center alert-warning">{{error}}</div>
+                        <ion-input class="email-input genral_input mb-2" formControlName="username"
+                                   placeholder="Username" type="text">
+                        </ion-input>
+                        <ion-input class="email-input genral_input mb-4" formControlName="password"
+                                   placeholder="Password" type="password">
+                        </ion-input>
+                        <button class="login-button" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+                    </form>
+                    <p (click)="forgotPassword()" class="align-self-center forget-password">Forgot password</p>
+                </div>
+                <div style="position: fixed; bottom: 30px;">
+                    <span class="footer-text-color mr-2">Help</span>
+                    <span class="footer-text-color mr-2">settings</span>
+                    <span class="footer-text-color mr-2">imprint</span>
+                    <span class="footer-text-color mr-2">privacy</span>
+                    <span class="footer-text-color">policy</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-flex-md-6 image-div-right vh-100"></div>
     </div>
-  </div>
 </ion-content>
+

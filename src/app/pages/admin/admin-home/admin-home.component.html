@@ -1,0 +1,61 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+    <section class="container">
+
+        <h1 class="mt-5">Users List</h1>
+
+        <ion-fab [routerLink]="['/admin/add']" horizontal="end" slot="fixed" vertical="bottom">
+            <ion-fab-button>
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+
+
+        <ion-item>
+            <ion-label position="floating">Recherche</ion-label>
+            <ion-input #input (keyup)="applyFilter($event)"></ion-input>
+        </ion-item>
+
+        <div class="mat-elevation-z8 overflow-auto">
+            <table [dataSource]="dataSource" fixedLayout="true" mat-table matSort>
+
+                <ng-container matColumnDef="fullName">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>FullName</th>
+                    <td *matCellDef="let row" mat-cell> {{row.fullName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Email</th>
+                    <td *matCellDef="let row" mat-cell> {{row.username}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="companyName">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Company Name</th>
+                    <td *matCellDef="let row" mat-cell> {{row.companyName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="position">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Position</th>
+                    <td *matCellDef="let row" mat-cell> {{row.position}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="role">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Role</th>
+                    <td *matCellDef="let row" mat-cell> {{row.roles[0].name}}</td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr (click)="editRow(row.id)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr *matNoDataRow class="mat-row">
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </section>
+
+
+</ion-content>

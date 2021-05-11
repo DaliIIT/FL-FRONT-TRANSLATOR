@@ -1,0 +1,60 @@
+<app-nav-bar></app-nav-bar>
+<ion-content>
+    <div class="d-flex flex-row justify-content-center pt-5">
+        <div class="col-flex-md-6">
+            <form [formGroup]="signUpForm">
+                <div class="ion-text-center alert-warning mb-1">{{(error ||
+                    usernameControl?.errors?.userExists) && !userId ? 'Username already exists' : ''}}</div>
+                <ion-input class="email-input genral_input mb-2" formControlName="companyName"
+                           placeholder="Company Name" type="text">
+                </ion-input>
+                <ion-input class="email-input genral_input mb-2" formControlName="fullName"
+                           placeholder="Full Name" type="text">
+                </ion-input>
+
+                <ion-input class="email-input genral_input mb-2" formControlName="birthday"
+                           placeholder="Birthday" type="date">
+                </ion-input>
+                <ion-input class="email-input genral_input mb-2" formControlName="position"
+                           placeholder="Position" type="text">
+                </ion-input>
+                <ion-select class="email-input genral_input mb-2" formControlName="languages" multiple="true"
+                            placeholder="Select languages">
+                    <ion-select-option *ngFor="let langage of langages"
+                                       value="{{langage}}">{{langage}}</ion-select-option>
+                </ion-select>
+
+                <div class="d-flex justify-content-around mb-2">
+                    <div class="d-flex justify-content-center">
+                        <ion-checkbox class="mr-3" formControlName="doctor" color="medium" slot="start"></ion-checkbox>
+                        <ion-label style="color: #8C8C8C">Doctor</ion-label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <ion-checkbox class="mr-3" formControlName="translator" color="medium"
+                                      slot="start"></ion-checkbox>
+                        <ion-label style="color: #8C8C8C">Translator</ion-label>
+                    </div>
+                </div>
+
+                <ion-input class="email-input genral_input mb-2" formControlName="username"
+                           placeholder="Email" type="text">
+                </ion-input>
+                <ion-input class="email-input genral_input mb-2" formControlName="password"
+                           placeholder="Password" type="password">
+                </ion-input>
+                <ion-input class="email-input genral_input mb-2" formControlName="confirmPassword"
+                           placeholder="Confirm Password" type="password">
+                </ion-input>
+                <div class="d-flex align-items-center mb-4">
+                    <ion-checkbox class="mr-3" formControlName="privacy" color="medium" slot="start"></ion-checkbox>
+                    <ion-label style="color: #8C8C8C">Privacy Policy</ion-label>
+                </div>
+
+            </form>
+            <button (click)="signUp()" [disabled]="signUpForm.invalid" class="signup-button mb-3">Save</button>
+            <button *ngIf="userId" (click)="deleteUser(userId)" class="delete-button">Delete User</button>
+        </div>
+    </div>
+
+</ion-content>
+

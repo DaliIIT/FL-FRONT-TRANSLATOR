@@ -1,0 +1,29 @@
+<ion-header class="ion-padding" style="background-color: #483CDC; color:white;">
+    <h3 class="mb-4">Incoming Calls</h3>
+    <div>
+        <ion-button color="tertiary" class="mr-3">On-Demand</ion-button>
+        <ion-button color="tertiary">Scheduled</ion-button>
+    </div>
+</ion-header>
+<ion-content>
+
+    <div class="p-4">
+        <div class="d-flex flex-row" *ngFor="let call of calls">
+
+            <div class="col-flex-xs-12 pl-0">
+
+                <span style="color: #1A1A1A;font-size: 16px;font-weight: bold">{{ call.name}}</span>
+                <br>
+                <span class="mr-5" style="font-size: 14px">{{call.language}}</span>
+
+                <ion-fab-button size="small" color="success">
+                    <ion-icon name="call-outline"></ion-icon>
+                </ion-fab-button>
+
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>

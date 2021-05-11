@@ -1,0 +1,41 @@
+<ion-header class="ion-padding" style="background-color: #483CDC; color:white;">
+    <h3 class="mb-4">Welcome Mutaz</h3>
+    <div class="d-flex flex-row">
+        <div class="col-flex-xs-6 pl-0">
+            <h4>Total Minutes</h4>
+            <div>
+                <h6>255 min</h6>
+            </div>
+        </div>
+        <div class="col-flex-xs-6">
+            <h4>Calls</h4>
+            <div>
+                <div>
+                    <h6>40 calls</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-header>
+<ion-content>
+
+    <div class="p-4">
+        <h4 class="mb-4">Recent Calls</h4>
+        <div class="d-flex flex-row" *ngFor="let call of calls">
+
+            <div class="col-flex-xs-12 pl-0">
+                <div>
+                    <span style="color: #1A1A1A;font-size: 16px;font-weight: bold">{{ call.name}}</span>
+                </div>
+                <div>
+                    <span class="mr-5" style="font-size: 14px">Call duration {{call.duration}} min</span>
+                    <span style="color: #1A1A1A;font-size: 16px;font-weight: bold">{{ call.date }}
+                        <ion-icon name="information-circle-outline"></ion-icon></span>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>

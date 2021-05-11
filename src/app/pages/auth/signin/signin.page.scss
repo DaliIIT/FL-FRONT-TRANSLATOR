@@ -1,71 +1,70 @@
-ion-content {
-  --background: none;
-  background-image: url("../../../../assets/image/back_im.png");
-  background-position: top center;
+.image-div-right {
+  background-image: url("../../../../../src/assets/image/login-image.svg");
   background-repeat: no-repeat;
-  background-size: 100% 46vh;
+  background-size: cover
+}
 
-  .center {
-    display: flex;
-    justify-content: center;
-  }
+.left-bar {
+  width: 15px;
+  background: #483CDC;
+  height: 100%;
+}
 
-  .content-section {
-    justify-self: center;
-    max-width: 30rem;
-    width: 100%;
-    padding: 4vh 24px 20px 20px;
-    margin-top: 38vh;
-    background-color: var(--white);
-    border-radius: 17px;
+.text-color-grey {
+  color: #818181;
+}
 
-    .title {
-      font-family: "sf_ui_b";
-      font-size: 40px;
-      color: var(--black);
-      margin: 0px;
-    }
+.app-title {
+  width: 121px;
+  height: 30px;
+  font-family: Circular, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  color: #483CDC;
+}
 
-    .simple_lbl {
-      color: var(--lht_gray);
-      margin: 0px;
-      font-size: 16px;
-      font-family: "sf_ui_r";
-    }
+.app-description {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 61px;
+  color: #000000;
+}
 
-    .email-input {
-      margin-bottom: 6px;
-      margin-top: 2vh;
-      & + .email-input {
-        margin-top: 4vh;
-      }
-    }
-    .btn-login {
-      margin: 4vh 0px 0px 0px;
-    }
-    .btn_forgot {
-      --color: var(--lht_bc);
-      text-transform: capitalize;
-      font-family: "sf_ui_md";
-      margin: 12px 0px 19px 0px;
-      height: 18px;
-    }
-    .account-text {
-      // margin-top: 3vh;
-      margin: 0;
-      font-size: 14px;
-      font-family: "sf_ui_r";
-      color: var(--lht_gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      ion-button {
-        text-transform: none;
-        --color: var(--my_theme);
-        font-family: "sf_ui_b";
-        margin-left: 5px;
-        height: 20px;
-      }
-    }
-  }
+.text-color {
+  color: #483CDC;
+}
+
+.login-text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #1A1A1A;
+}
+
+.email-input {
+  width: 350px;
+  height: 80px;
+  background: #F7F7F7;
+  border-radius: 7px;
+  color: #8C8C8C;
+}
+
+.login-button {
+  width: 353px;
+  height: 48px;
+  background-color: #483CDC !important;
+  border-radius: 25px;
+  color: white;
+}
+
+.forget-password {
+  color: #D0D0D0;
+  margin-top: 20px;
+}
+
+.footer-text-color {
+  color: #636363
 }

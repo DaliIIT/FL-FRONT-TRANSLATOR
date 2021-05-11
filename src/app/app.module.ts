@@ -12,9 +12,11 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {RxStompService} from '@stomp/ng2-stompjs';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InterceptorService} from '@core/interceptor/interceptor-service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -27,6 +29,7 @@ import {RxStompService} from '@stomp/ng2-stompjs';
         AppRoutingModule,
         CallModalPageModule,
         HttpClientModule,
+        BrowserAnimationsModule,
     ],
     providers: [
         NativeStorage,
@@ -34,6 +37,12 @@ import {RxStompService} from '@stomp/ng2-stompjs';
         SplashScreen,
         RxStompService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: InterceptorService,
+            multi: true
+        }
+
     ],
     bootstrap: [AppComponent],
 })

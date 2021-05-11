@@ -20,6 +20,15 @@ export class UserService {
         return this.http.post(`${environment.authUrl}/user/add/client`, this.clean(value));
     }
 
+    getById(id: number): Observable<User> {
+        console.log(id);
+        return this.http.get<User>(`${environment.authUrl}/user/${id}`);
+    }
+
+    delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${environment.authUrl}/user/${id}`);
+    }
+
     public getAll(): Observable<User[]> {
         return this.http.get<User[]>(`${environment.authUrl}/user/all`);
     }

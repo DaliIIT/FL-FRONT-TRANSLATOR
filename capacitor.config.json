@@ -1,6 +1,6 @@
 {
   "appId": "app.saasmonks.doctroadmin",
-  "appName": "doctro admin",
+  "appName": "Translatlly",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

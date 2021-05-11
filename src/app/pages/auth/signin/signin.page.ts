@@ -37,7 +37,15 @@ export class SigninPage implements OnInit {
         const formValue = this.loginForm.value;
         this.auth.login(formValue).subscribe(result => {
             if (!result.error) {
-                this.nav.navigateRoot('/home');
+                if (this.auth.isLoggedIn()) {
+                    if (this.auth.getClaims().some(role => role === 'ROLE_ADMIN')) {
+                        this.nav.navigateRoot('/admin/home');
+                    } else if (this.auth.getClaims().some(role => role === 'ROLE_TRANSLATOR')) {
+                        this.nav.navigateRoot('/translator/tabs/home');
+                    } else if (this.auth.getClaims().some(role => role === 'ROLE_CLIENT')) {
+                        this.nav.navigateRoot('/doctor/home');
+                    }
+                }
                 this.loginForm.reset();
             }
             this.error = result.error === 'invalid_grant' ? 'Incorrect username or password' : '';
