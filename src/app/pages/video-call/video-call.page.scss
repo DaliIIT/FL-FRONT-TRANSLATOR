@@ -1,13 +1,20 @@
-#video-wrapper {
-  text-align: center;
+$control-color:#483CDC;
+
+.call-wrapper{
+  overflow: hidden;
+  height: 100%;
+  //position: fixed;
+}
+
+.video-wrapper {
   background-color: #343434;
-  border-radius: 4px;
+  position: relative;
 }
 
 #remote-video {
   max-width: 100%;
-  //max-height: 90vh;
-  height: 90vh;
+  max-height: 100vh;
+  height: calc(100vh - 9rem);
   border-radius: 4px;
 }
 
@@ -17,11 +24,11 @@
   right: 1.5rem;
   bottom: 1.5rem;
   width: 25vw;
-  height: 25vw;
+  height: 50vw;
   max-width: 10rem;
   max-height: 10rem;
-  border: 3px solid white;
-  border-radius: 4px;
+  border-radius: 25px;
+  background-color: black;
 }
 
 .control {
@@ -36,4 +43,79 @@
   button{
     margin: 2px;
   }
+}
+
+.call-control{
+  max-height: 9rem;
+  //background-color: #483CDC;
+  position: relative;
+  .end-btn-wrapper{
+    background-color: transparent;
+    height: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .right-rect, .left-rect{
+      height: 3rem;
+      width: calc(50% - 3rem);
+      background-color: $control-color;
+    }
+    .left-rect{
+      background-color: $control-color;
+      border-top-right-radius: 20px;
+    }
+    .right-rect{
+      //background-color: #1f8ced;
+      border-top-left-radius: 20px;
+    }
+
+}
+  .down-rec{
+    height: 3rem;
+    background-color: $control-color;
+  }
+}
+
+
+.rect
+{
+  height: 3rem;
+  width: 6rem;
+  //background:rgba(0,0,0,0.5);
+  position:relative;
+}
+.circle{
+  display:block;
+  width: 6rem;
+  height: 3rem;
+  top:0rem;
+  left:0;
+  overflow:hidden;
+  position:absolute;
+}
+.circle:after{
+  content:'';
+  width: 6.5rem;
+  height: 6.5rem;
+  -moz-border-radius: 6rem;
+  -webkit-border-radius: 6rem;
+  border-radius: 6rem;
+  background:rgba(0,0,0,0);
+  position:absolute;
+  top:-3.5rem;
+  left: -.25rem;
+  //border: 1rem solid rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 3rem $control-color;
+  z-index: 100;
+}
+
+.end-call{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  top: 0;
+  left: calc(50% - 2.5rem);
+  background-color: #FC015B;
 }

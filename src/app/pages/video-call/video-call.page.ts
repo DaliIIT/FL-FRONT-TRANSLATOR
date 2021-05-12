@@ -20,6 +20,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
                 private route: ActivatedRoute) {
         this.isCallStarted$ = this.callService.isCallStarted$;
         this.peerId = this.callService.initPeer();
+        console.log(this.peerId);
     }
 
     ngOnInit(): void {
