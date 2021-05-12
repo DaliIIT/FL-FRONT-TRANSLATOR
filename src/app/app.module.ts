@@ -17,6 +17,7 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from '@core/interceptor/interceptor-service';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {InterceptorService} from '@core/interceptor/interceptor-service';
         CallModalPageModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        NgxPermissionsModule.forRoot()
     ],
     providers: [
         NativeStorage,

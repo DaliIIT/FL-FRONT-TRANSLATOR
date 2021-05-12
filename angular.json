@@ -46,7 +46,10 @@
                 "input": "node_modules/bootstrap-grid-flexbox/dist/css/bootstrap-grid-flexbox.min.css"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/peerjs/dist/peerjs.js",
+              "src/assets/js/peerjs.min.js"
+            ]
           },
           "configurations": {
             "production": {

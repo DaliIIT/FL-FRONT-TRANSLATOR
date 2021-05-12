@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, from, Observable, of, Subject} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {catchError, map, mapTo, switchMap, tap} from 'rxjs/operators';
+import {catchError, exhaustMap, filter, finalize, map, mapTo, skip, switchMap, take, tap} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import {Tokens} from 'src/app/core/models/Tokens';
 import {LoginError} from 'src/app/core/models/LoginError';
@@ -18,6 +18,13 @@ const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export class AuthService {
     private loggedUser: string;
     private validUntil: Date = new Date();
+    private tokenSubject = new BehaviorSubject(this.getJwtToken());
+    private _tokenChange = this.tokenSubject.asObservable().pipe(filter(value => !!value));
+    private isTokenRefreshing = false;
+
+    get tokenChange(): Observable<string> {
+        return this._tokenChange;
+    }
 
     constructor(private http: HttpClient,
                 private router: Router,
@@ -71,21 +78,27 @@ export class AuthService {
 
     refreshToken() {
         const headers = this.authBasic;
-        return this.getRefreshToken().pipe(map(refreshToken => new HttpParams()
-                .set('grant_type', 'refresh_token')
-                .set('refresh_token', refreshToken)),
-            switchMap(body => this.http.post<any>(`${environment.authUrl}/oauth/token`, body, {headers})),
-            tap((tokens: Tokens) => {
-                this.storeAccessToken(tokens.access_token);
-            })
-        );
+        // this.isTokenRefreshing ? this.tokenChange.pipe(skip(1), take(1), map(value => new Tokens(value))) :
+        return this.getRefreshToken().pipe(
+                filter(value => !!value),
+                tap(x => this.isTokenRefreshing = true),
+                map(refreshToken => new HttpParams()
+                    .set('grant_type', 'refresh_token')
+                    .set('refresh_token', refreshToken)),
+                exhaustMap(body => this.http.post<any>(`${environment.authUrl}/oauth/token`, body, {headers})
+                    .pipe(finalize(() => this.isTokenRefreshing = false))),
+                tap((tokens: Tokens) => {
+                    this.validUntil = new Date(new Date().getTime() + Number(tokens.expires_in) * 1000);
+                    this.storeAccessToken(tokens.access_token);
+                }),
+            );
     }
 
     getValidJwtTokenOrRefresh$() {
-        if (this.getJwtToken() && this.validUntil.getTime() <= Date.now()) {
+        if (this.getJwtToken() && this.validUntil.getTime() < Date.now()) {
             return this.refreshToken().pipe(map((token: Tokens) => token.access_token));
         }
-        return of(localStorage.getItem(ACCESS_TOKEN));
+        return this.tokenChange.pipe(take(1));
         // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
     }
 
@@ -107,7 +120,7 @@ export class AuthService {
     }
 
     private doLoginUser(username: string, token: Tokens) {
-        this.validUntil = new Date(new Date().getTime() + token.expires_in * 1000);
+        this.validUntil = new Date(new Date().getTime() + Number(token.expires_in) * 1000);
         this.loggedUser = username;
         this.storeTokens(token);
     }
@@ -125,6 +138,7 @@ export class AuthService {
     private storeAccessToken(jwt: string) {
         // TODO use ionic storage
         localStorage.setItem(ACCESS_TOKEN, jwt);
+        this.tokenSubject.next(jwt);
         // this.nativeStorage.setItem(ACCESS_TOKEN, jwt)
         //     .then(
         //         () => console.log('Stored item!'),
