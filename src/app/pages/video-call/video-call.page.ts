@@ -58,12 +58,12 @@ export class VideoCallPage implements OnInit, OnDestroy {
             .pipe(filter(res => !!res))
             .subscribe(stream => this.remoteVideo.nativeElement.srcObject = stream);
 
-        // this.route.queryParams.pipe(
-        //     // filter(params => !!params.peerId),
-        //     map(params => params.peerId),
-        //     switchMap(peerId => peerId ? of(this.callService.establishMediaCall(peerId)) : of(this.callService.enableCallAnswer()))
-        // ).subscribe(_ => {
-        // });
+        this.route.queryParams.pipe(
+            // filter(params => !!params.pid),
+            map(params => params.pid),
+            switchMap(peerId => peerId ? of(this.callService.establishMediaCall(peerId)) : of(this.callService.enableCallAnswer()))
+        ).subscribe(_ => {
+        });
     }
 
 
