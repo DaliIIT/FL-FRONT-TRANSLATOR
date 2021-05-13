@@ -3,7 +3,8 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {v4 as uuidv4} from 'uuid';
 // import * as Peer from 'peerjs';
 import Peer from 'peerjs';
-import { NgxPermissionsService } from 'ngx-permissions';
+import {NgxPermissionsService} from 'ngx-permissions';
+import {CallSocketService} from '@core/services/socket/call-socket.service';
 
 
 @Injectable()
@@ -21,10 +22,13 @@ export class CallService {
     private isCallStartedBs = new Subject<boolean>();
     public isCallStarted$ = this.isCallStartedBs.asObservable();
 
-    constructor(private permissionsService: NgxPermissionsService) {
+    constructor(
+        private permissionsService: NgxPermissionsService,
+        private callSocketService: CallSocketService
+    ) {
     }
 
-    public initPeer(): string {
+    public initPeer(id = uuidv4()): string {
         if (!this.peer || this.peer.disconnected) {
             const peerJsOptions: Peer.PeerJSOption = {
                 debug: 3,
@@ -39,7 +43,6 @@ export class CallService {
                 }
             };
             try {
-                const id = uuidv4();
                 this.peer = new Peer(id, peerJsOptions);
                 return id;
             } catch (error) {

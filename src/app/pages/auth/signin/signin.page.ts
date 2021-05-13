@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuController, NavController} from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/core/services/auth/auth-service.service';
+import {UserService} from '@core/services/api/user.service';
 
 @Component({
     selector: 'app-signin',
