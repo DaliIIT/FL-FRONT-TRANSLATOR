@@ -7,7 +7,7 @@ import {DoctorGuard} from '@core/guards/doctor.guard';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'auth',
+        redirectTo: 'video-call',
         pathMatch: 'full',
     },
     {
