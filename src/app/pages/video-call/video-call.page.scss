@@ -1,6 +1,6 @@
-$control-color:#483CDC;
+$control-color: #483CDC;
 
-.call-wrapper{
+.call-wrapper {
   overflow: hidden;
   height: 100%;
   //position: fixed;
@@ -14,104 +14,149 @@ $control-color:#483CDC;
 #remote-video {
   max-width: 100%;
   max-height: 100vh;
-  height: calc(100vh - 9rem);
+  height: calc(100vh - 3rem);
   border-radius: 4px;
+  background: url("src/assets/image/user.svg") no-repeat center;
+  background-size: 40%;
 }
 
 #local-video {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   right: 1.5rem;
-  bottom: 1.5rem;
+  bottom: 5rem;
   width: 25vw;
-  height: 50vw;
+  height: 35vw;
   max-width: 10rem;
   max-height: 10rem;
   border-radius: 25px;
   background-color: black;
 }
+.pulsing {
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  background:#000;
+  box-shadow: 0 0 0 0 #0004;
+  animation:pl1 1s infinite;
+}
+@keyframes pl1 {
+  100% {box-shadow: 0 0 0 30px #0000}
+}
+//.control {
+//  position: absolute;
+//  z-index: 3;
+//  padding: 5px;
+//  //top: auto;
+//  bottom: 2rem;
+//  width: 100vw;
+//  display: flex;
+//  justify-content: center;
+//
+//  button {
+//    margin: 2px;
+//  }
+//}
 
-.control {
+.call-control-wrapper{
   position: absolute;
-  z-index: 2;
-  padding: 5px;
-  //top: auto;
-  bottom: 2rem;
+  bottom: 0;
   width: 100vw;
-  display: flex;
-  justify-content: center;
-  button{
-    margin: 2px;
-  }
 }
 
-.call-control{
+.call-control {
   max-height: 9rem;
   //background-color: #483CDC;
   position: relative;
-  .end-btn-wrapper{
+
+  .end-btn-wrapper {
     background-color: transparent;
     height: 6rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 
-    .right-rect, .left-rect{
+    .right-rect, .left-rect {
       height: 3rem;
       width: calc(50% - 3rem);
       background-color: $control-color;
     }
-    .left-rect{
+
+    .left-rect {
       background-color: $control-color;
       border-top-right-radius: 20px;
     }
-    .right-rect{
+
+    .right-rect {
       //background-color: #1f8ced;
       border-top-left-radius: 20px;
     }
 
-}
-  .down-rec{
+  }
+
+  .down-rec {
     height: 3rem;
     background-color: $control-color;
   }
+
 }
 
+.call-control-content {
+  position: absolute;
+  z-index: 4;
+  top: 3rem;
+  left: 1rem;
+  width: calc(100% - 1rem);
+  height: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-.rect
-{
+.mute {
+  padding: 1.2rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+}
+
+.rect {
   height: 3rem;
   width: 6rem;
   //background:rgba(0,0,0,0.5);
-  position:relative;
+  position: relative;
 }
-.circle{
-  display:block;
+
+.circle {
+  display: block;
   width: 6rem;
   height: 3rem;
-  top:0rem;
-  left:0;
-  overflow:hidden;
-  position:absolute;
+  top: 0rem;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
 }
-.circle:after{
-  content:'';
+
+.circle:after {
+  content: '';
   width: 6.5rem;
   height: 6.5rem;
   -moz-border-radius: 6rem;
   -webkit-border-radius: 6rem;
   border-radius: 6rem;
-  background:rgba(0,0,0,0);
-  position:absolute;
-  top:-3.5rem;
+  background: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: -3.5rem;
   left: -.25rem;
   //border: 1rem solid rgba(0,0,0,0.5);
   box-shadow: 0 0 0 3rem $control-color;
-  z-index: 100;
+  z-index: 3;
 }
 
-.end-call{
+.end-call {
   position: absolute;
+  padding: 1.2rem;
   width: 5rem;
   height: 5rem;
   border-radius: 100%;

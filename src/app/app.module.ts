@@ -18,6 +18,7 @@ import {RxStompService} from '@stomp/ng2-stompjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from '@core/interceptor/interceptor-service';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {ActivitySocketService} from '@core/services/socket/activity-socket.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -49,4 +50,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     bootstrap: [AppComponent],
 })
 export class AppModule {
+
+    // constructor(private activitySocketService: ActivitySocketService) {
+    // }
 }
