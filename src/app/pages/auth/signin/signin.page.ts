@@ -39,17 +39,21 @@ export class SigninPage implements OnInit {
         this.auth.login(formValue).subscribe(result => {
             if (!result.error) {
                 if (this.auth.isLoggedIn()) {
-                    if (this.auth.getClaims().some(role => role === 'ROLE_ADMIN')) {
-                        this.nav.navigateRoot('/admin/home');
-                    } else if (this.auth.getClaims().some(role => role === 'ROLE_TRANSLATOR')) {
-                        this.nav.navigateRoot('/translator/tabs/home');
-                    } else if (this.auth.getClaims().some(role => role === 'ROLE_CLIENT')) {
-                        this.nav.navigateRoot('/doctor/home');
-                    }
+                    this.navigate();
                 }
                 this.loginForm.reset();
             }
             this.error = result.error === 'invalid_grant' ? 'Incorrect username or password' : '';
         });
+    }
+
+    private navigate() {
+        if (this.auth.getClaims().some(role => role === 'ROLE_ADMIN')) {
+            this.nav.navigateRoot('/admin/home');
+        } else if (this.auth.getClaims().some(role => role === 'ROLE_TRANSLATOR')) {
+            this.nav.navigateRoot('/translator/tabs/home');
+        } else if (this.auth.getClaims().some(role => role === 'ROLE_CLIENT')) {
+            this.nav.navigateRoot('/doctor/home');
+        }
     }
 }

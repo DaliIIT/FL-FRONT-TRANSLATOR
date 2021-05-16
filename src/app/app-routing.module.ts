@@ -3,6 +3,7 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AdminGuard} from '@core/guards/admin.guard';
 import {TranslatorGuard} from '@core/guards/translator.guard';
 import {DoctorGuard} from '@core/guards/doctor.guard';
+import {LoginGuard} from '@core/guards/login.guard';
 
 const routes: Routes = [
     {
@@ -19,6 +20,7 @@ const routes: Routes = [
         path: 'auth',
         loadChildren: () =>
             import('src/app/pages/auth/auth.module').then((m) => m.AuthModule),
+        canActivate: [LoginGuard]
     },
     {
         path: 'admin',

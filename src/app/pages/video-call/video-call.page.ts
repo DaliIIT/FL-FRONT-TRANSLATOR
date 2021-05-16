@@ -136,7 +136,8 @@ export class VideoCallPage implements OnInit, OnDestroy {
         try {
             this.callService.closeMediaCall();
         } finally {
-            this.apiCallService.leaveRoom(this.roomId).subscribe(_ => this.router.navigate(['/']));
+            this.apiCallService.leaveRoom(this.roomId).subscribe();
+            this.router.navigate(['/']);
         }
     }
 
