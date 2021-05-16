@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, of, OperatorFunction, throwError} from 'rxjs';
 import {CallService} from 'src/app/pages/video-call/call.service';
 import {catchError, filter, map, switchMap, take, takeWhile, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -39,6 +39,27 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.menu.enable(false);
     }
 
+    displayBadRequestError() {
+        return catchError(err => {
+            if (err instanceof HttpErrorResponse && err.status === 400) {
+                console.log(err);
+                this.alertController.create({
+                    header: 'Error',
+                    message: `<strong>${err.error.message}</strong>`,
+                    buttons: [
+                        {
+                            text: 'Okay',
+                            handler: () => {
+                                this.router.navigate(['/']);
+                            }
+                        }
+                    ]
+                }).then(alert => alert.present());
+            }
+            return throwError(err);
+        });
+    }
+
     ngOnInit(): void {
 
         this.activitySocket.getObservable().pipe(
@@ -64,7 +85,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.route.queryParams.pipe(
             takeWhile(() => this._isAlive),
             filter(params => !!params.user),
-            switchMap(params => this.apiCallService.joinCall(this.peerId, params.user).pipe()),
+            switchMap(params => this.apiCallService.joinCall(this.peerId, params.user).pipe(this.displayBadRequestError())),
             tap(room => this.roomId = room.roomId),
             map(room => room.clientPeerId),
             switchMap(peerId => this.callService.establishMediaCall(peerId))
@@ -84,6 +105,13 @@ export class VideoCallPage implements OnInit, OnDestroy {
                 filter(res => !!res),
             )
             .subscribe(stream => this.remoteVideo.nativeElement.srcObject = stream);
+
+        // this.route.queryParams.pipe(
+        //     // filter(params => !!params.peerId),
+        //     map(params => params.peerId),
+        //     switchMap(peerId => peerId ? of(this.callService.establishMediaCall(peerId)) : of(this.callService.enableCallAnswer()))
+        // ).subscribe(_ => {
+        // });
     }
 
 
