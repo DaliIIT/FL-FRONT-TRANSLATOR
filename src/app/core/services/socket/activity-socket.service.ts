@@ -20,7 +20,7 @@ export class ActivitySocketService extends AbstractWebSocketService {
     constructor(stompService: RxStompService, authService: AuthService) {
         super(stompService,
             progressStompConfig,
-            new WebSocketOptions('/user/activity/ask'),
+            new WebSocketOptions('/user/activity'),
             authService
         );
     }

@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 // import * as Peer from 'peerjs';
 import Peer from 'peerjs';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {CallSocketService} from '@core/services/socket/call-socket.service';
+import {environment} from 'src/environments/environment';
 
 
 @Injectable()
@@ -24,7 +24,6 @@ export class CallService {
 
     constructor(
         private permissionsService: NgxPermissionsService,
-        private callSocketService: CallSocketService
     ) {
     }
 
@@ -34,12 +33,8 @@ export class CallService {
                 debug: 3,
                 config: {
                     iceServers: [
-                        {
-                            urls: [
-                                'stun:stun1.l.google.com:19302',
-                                'stun:stun2.l.google.com:19302',
-                            ],
-                        }]
+                        ...environment.iceServers
+                    ]
                 }
             };
             try {
@@ -61,7 +56,6 @@ export class CallService {
                 console.error(err);
                 // this.snackBar.open(err, 'Close');
             });
-
             this.mediaCall = this.peer.call(remotePeerId, stream);
             if (!this.mediaCall) {
                 const errorMessage = 'Unable to connect to remote peer';
@@ -75,15 +69,17 @@ export class CallService {
                 (remoteStream) => {
                     this.remoteStreamBs.next(remoteStream);
                 });
+
             this.mediaCall.on('error', err => {
-                // this.snackBar.open(err, 'Close');
+                alert(err.toString());
                 console.error(err);
                 this.isCallStartedBs.next(false);
             });
+
             this.mediaCall.on('close', () => this.onCallClose());
         } catch (ex) {
             console.error(ex);
-            // this.snackBar.open(ex, 'Close');
+            alert(ex.toString());
             this.isCallStartedBs.next(false);
         }
     }

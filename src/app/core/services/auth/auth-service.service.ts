@@ -78,8 +78,8 @@ export class AuthService {
 
     refreshToken() {
         const headers = this.authBasic;
-        // this.isTokenRefreshing ? this.tokenChange.pipe(skip(1), take(1), map(value => new Tokens(value))) :
-        return this.getRefreshToken().pipe(
+        return this.isTokenRefreshing ? this.tokenChange.pipe(skip(1), take(1), map(value => new Tokens(value))) :
+         this.getRefreshToken().pipe(
                 filter(value => !!value),
                 tap(x => this.isTokenRefreshing = true),
                 map(refreshToken => new HttpParams()
@@ -95,7 +95,11 @@ export class AuthService {
     }
 
     getValidJwtTokenOrRefresh$() {
-        if (this.getJwtToken() && this.validUntil.getTime() < Date.now()) {
+        const jwtToken = this.getJwtToken();
+        const time = this.validUntil.getTime();
+        const number = Date.now();
+        const b = this.validUntil.getTime() < Date.now();
+        if (this.getJwtToken() && this.validUntil.getTime() - 2000 < Date.now()) {
             return this.refreshToken().pipe(map((token: Tokens) => token.access_token));
         }
         return this.tokenChange.pipe(take(1));
