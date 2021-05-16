@@ -80,8 +80,8 @@ export class VideoCallPage implements OnInit, OnDestroy {
                 filter(params => !!params.lang),
                 switchMap(params => this.apiCallService.askForTranslator(params.lang, this.peerId)),
                 tap(roomId => this.roomId = roomId && roomId.value),
-                switchMap(_ => this.callService.enableCallAnswer())
-            ).subscribe(_ => {
+                switchMap(() => this.callService.enableCallAnswer())
+            ).subscribe(() => {
             });
 
             // join user
@@ -92,7 +92,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
                 tap(room => this.roomId = room.roomId),
                 map(room => room.clientPeerId),
                 switchMap(peerId => this.callService.establishMediaCall(peerId))
-            ).subscribe(_ => {
+            ).subscribe(() => {
             });
         });
 
