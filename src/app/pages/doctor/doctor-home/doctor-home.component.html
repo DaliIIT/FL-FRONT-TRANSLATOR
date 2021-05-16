@@ -27,8 +27,8 @@
                     <span>></span>
                 </div>
                 <hr>
-                <div *ngFor="let language of languages">
-                    <span><strong>{{language}}</strong></span>
+                <div *ngFor="let language of languages | async">
+                    <span (click)="askForTranslator(language.name)"><strong>{{language.name}}</strong></span>
                     <hr>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {CallService} from 'src/app/pages/video-call/call.service';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {filter, switchMap} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {ApiCallService} from '@core/services/api/api-call.service';
 import {MenuController} from '@ionic/angular';
@@ -45,7 +45,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.route.queryParams.pipe(
             filter(params => !!params.user),
             switchMap(params => this.apiCallService.joinCall(this.peerId, params.user)),
-            switchMap( peerId => this.callService.establishMediaCall(peerId))
+            switchMap(peerId => this.callService.establishMediaCall(peerId))
         ).subscribe(_ => {
             console.log('fdsfds');
         });

@@ -54,7 +54,7 @@ export class CallService {
     public async establishMediaCall(remotePeerId: string) {
         try {
             await this.permissionsService.hasPermission(this.perm);
-            const stream = await navigator.mediaDevices.getUserMedia({video: true, audio: false});
+            const stream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
 
             const connection = this.peer.connect(remotePeerId);
             connection.on('error', err => {
