@@ -1,12 +1,15 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {CallService} from 'src/app/pages/video-call/call.service';
-import {filter, map, switchMap, takeWhile, tap} from 'rxjs/operators';
+import {catchError, filter, map, switchMap, take, takeWhile, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiCallService} from '@core/services/api/api-call.service';
-import {MenuController} from '@ionic/angular';
+import {AlertController, MenuController} from '@ionic/angular';
 import {UserService} from '@core/services/api/user.service';
+import {resolve} from '@angular/compiler-cli/src/ngtsc/file_system';
+import {__assign} from 'tslib';
 import {ActivitySocketService} from '@core/services/socket/activity-socket.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-video-call',
@@ -29,6 +32,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
                 private userService: UserService,
                 private route: ActivatedRoute,
                 private activitySocket: ActivitySocketService,
+                public alertController: AlertController,
                 private router: Router
     ) {
         this.isCallStarted$ = this.callService.isCallStarted$;
@@ -60,7 +64,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.route.queryParams.pipe(
             takeWhile(() => this._isAlive),
             filter(params => !!params.user),
-            switchMap(params => this.apiCallService.joinCall(this.peerId, params.user)),
+            switchMap(params => this.apiCallService.joinCall(this.peerId, params.user).pipe()),
             tap(room => this.roomId = room.roomId),
             map(room => room.clientPeerId),
             switchMap(peerId => this.callService.establishMediaCall(peerId))
@@ -71,29 +75,27 @@ export class VideoCallPage implements OnInit, OnDestroy {
             .pipe(
                 takeWhile(() => this._isAlive),
                 filter(res => !!res),
-                tap(res => res.getAudioTracks()[0].enabled = !this.isMuted)
             )
             .subscribe(stream => this.localVideo.nativeElement.srcObject = stream);
 
         this.callService.remoteStream$
             .pipe(
                 takeWhile(() => this._isAlive),
-                filter(res => !!res)
+                filter(res => !!res),
             )
             .subscribe(stream => this.remoteVideo.nativeElement.srcObject = stream);
-
-
-        // this.route.queryParams.pipe(
-        //     // filter(params => !!params.peerId),
-        //     map(params => params.peerId),
-        //     switchMap(peerId => peerId ? of(this.callService.establishMediaCall(peerId)) : of(this.callService.enableCallAnswer()))
-        // ).subscribe(_ => {
-        // });
     }
 
 
     onMute() {
-        this.isMuted = !this.isMuted;
+        this.callService.localStream$
+            .pipe(
+                take(1),
+                filter(res => !!res),
+            ).subscribe(stream => {
+            this.isMuted = !this.isMuted;
+            stream.getAudioTracks().forEach(value => value.enabled = !this.isMuted);
+        });
     }
 
     public endCall() {

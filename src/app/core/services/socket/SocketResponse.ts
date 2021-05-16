@@ -1,4 +1,7 @@
 export class SocketResponse {
-  type: string;
-  message: any;
+    type: string;
+    message: {
+        event: string;
+        value: any;
+    };
 }
