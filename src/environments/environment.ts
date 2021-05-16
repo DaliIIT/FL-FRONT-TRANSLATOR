@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  authUrl: 'http://localhost:8080',
-  wsUrl: 'ws://localhost:8080/stomp',
+  authUrl: 'https://translator-app-taieb.herokuapp.com',
+  wsUrl: 'ws://translator-app-taieb.herokuapp.com/stomp',
   iceServers: [
     {
       urls: 'stun:stun.l.google.com:19302'
