@@ -4,6 +4,7 @@ import {SocketResponse} from '@core/services/socket/SocketResponse';
 import {InjectableRxStompConfig, RxStompService} from '@stomp/ng2-stompjs';
 import {StompConfig} from '@stomp/stompjs';
 import {AuthService} from '@core/services/auth/auth-service.service';
+import {filter, take, takeWhile} from 'rxjs/operators';
 
 type Message<T> = { type: 'Success' | 'ERROR', message: T };
 type SubscriberResponse<T> = { observer: Observer<(x) => Message<T>> };
@@ -12,14 +13,16 @@ export abstract class AbstractWebSocketService {
     private obsStompConnection: Observable<any>;
     private subscribers: Array<any> = [];
     private subscriberIndex = 0;
-    private status = new BehaviorSubject<string>(null);
-    private status$ = this.status.asObservable();
+    private isConnected = new BehaviorSubject<boolean>(false);
+    private isConnected$ = this.isConnected.asObservable();
     private stompConfig: InjectableRxStompConfig | StompConfig = {
         heartbeatIncoming: 0,
         heartbeatOutgoing: 20000,
         reconnectDelay: 10000,
         debug: (str) => {
-           this.status.next(str);
+            if (str && str.toLowerCase().includes('subscribe')){
+                this.isConnected.next(true);
+            }
         }
     };
 
@@ -35,6 +38,7 @@ export abstract class AbstractWebSocketService {
         this.createObservableSocket();
         // Activate subscription to broker.
         this.connect();
+
     }
 
     /**
@@ -49,7 +53,7 @@ export abstract class AbstractWebSocketService {
      * Return an observable containing the socket status
      */
     public getStatus = () => {
-        return this.status$;
+        return this.isConnected$;
     };
 
 

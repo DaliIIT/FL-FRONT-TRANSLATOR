@@ -72,7 +72,7 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.peerId = this.callService.initPeer();
 
         this.activitySocket.getStatus().pipe(
-            skip(5),
+           filter(status => status),
             take(1)
         ).subscribe(_ => {
             console.log(_);
