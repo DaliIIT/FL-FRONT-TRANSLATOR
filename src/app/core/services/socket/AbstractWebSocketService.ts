@@ -1,4 +1,4 @@
-import {Observable, Observer} from 'rxjs';
+import {BehaviorSubject, Observable, Observer} from 'rxjs';
 import {WebSocketOptions} from '@core/services/socket/WebSocketOptions';
 import {SocketResponse} from '@core/services/socket/SocketResponse';
 import {InjectableRxStompConfig, RxStompService} from '@stomp/ng2-stompjs';
@@ -12,12 +12,14 @@ export abstract class AbstractWebSocketService {
     private obsStompConnection: Observable<any>;
     private subscribers: Array<any> = [];
     private subscriberIndex = 0;
+    private status = new BehaviorSubject<string>(null);
+    private status$ = this.status.asObservable();
     private stompConfig: InjectableRxStompConfig | StompConfig = {
         heartbeatIncoming: 0,
         heartbeatOutgoing: 20000,
         reconnectDelay: 10000,
         debug: (str) => {
-            console.log(str);
+           this.status.next(str);
         }
     };
 
@@ -41,6 +43,15 @@ export abstract class AbstractWebSocketService {
     public getObservable = () => {
         return this.obsStompConnection;
     };
+
+
+    /**
+     * Return an observable containing the socket status
+     */
+    public getStatus = () => {
+        return this.status$;
+    };
+
 
     private createObservableSocket = () => {
         this.obsStompConnection = new Observable(observer => {

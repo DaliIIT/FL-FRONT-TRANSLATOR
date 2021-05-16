@@ -71,25 +71,29 @@ export class VideoCallPage implements OnInit, OnDestroy {
 
         this.peerId = this.callService.initPeer();
 
-        // ask for translator
-        this.route.queryParams.pipe(
-            takeWhile(() => this._isAlive),
-            filter(params => !!params.lang),
-            switchMap(params => this.apiCallService.askForTranslator(params.lang, this.peerId)),
-            tap(roomId => this.roomId = roomId && roomId.value),
-            switchMap(_ => this.callService.enableCallAnswer())
-        ).subscribe(_ => {
-        });
+        this.activitySocket.getStatus().pipe(
+            filter(status => status && status.toLowerCase().includes('subscribe')),
+            take(1)).subscribe(_ => {
+            // ask for translator
+            this.route.queryParams.pipe(
+                takeWhile(() => this._isAlive),
+                filter(params => !!params.lang),
+                switchMap(params => this.apiCallService.askForTranslator(params.lang, this.peerId)),
+                tap(roomId => this.roomId = roomId && roomId.value),
+                switchMap(_ => this.callService.enableCallAnswer())
+            ).subscribe(_ => {
+            });
 
-        // join user
-        this.route.queryParams.pipe(
-            takeWhile(() => this._isAlive),
-            filter(params => !!params.user),
-            switchMap(params => this.apiCallService.joinCall(this.peerId, params.user).pipe(this.displayBadRequestError())),
-            tap(room => this.roomId = room.roomId),
-            map(room => room.clientPeerId),
-            switchMap(peerId => this.callService.establishMediaCall(peerId))
-        ).subscribe(_ => {
+            // join user
+            this.route.queryParams.pipe(
+                takeWhile(() => this._isAlive),
+                filter(params => !!params.user),
+                switchMap(params => this.apiCallService.joinCall(this.peerId, params.user)),
+                tap(room => this.roomId = room.roomId),
+                map(room => room.clientPeerId),
+                switchMap(peerId => this.callService.establishMediaCall(peerId))
+            ).subscribe(_ => {
+            });
         });
 
         this.callService.localStream$
