@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, of, OperatorFunction, throwError} from 'rxjs';
 import {CallService} from 'src/app/pages/video-call/call.service';
-import {catchError, filter, map, switchMap, take, takeWhile, tap} from 'rxjs/operators';
+import {catchError, filter, map, skip, switchMap, take, takeWhile, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiCallService} from '@core/services/api/api-call.service';
 import {AlertController, MenuController} from '@ionic/angular';
@@ -72,8 +72,10 @@ export class VideoCallPage implements OnInit, OnDestroy {
         this.peerId = this.callService.initPeer();
 
         this.activitySocket.getStatus().pipe(
-            filter(status => status && status.toLowerCase().includes('subscribe')),
-            take(1)).subscribe(_ => {
+            skip(5),
+            take(1)
+        ).subscribe(_ => {
+            console.log(_);
             // ask for translator
             this.route.queryParams.pipe(
                 takeWhile(() => this._isAlive),
