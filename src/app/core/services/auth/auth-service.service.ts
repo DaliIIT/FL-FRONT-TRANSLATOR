@@ -58,18 +58,18 @@ export class AuthService {
     }
 
     logout() {
+        const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+        this.removeTokens();
         this.router.navigate(['/auth/signin']);
-        return this.getRefreshToken().pipe(map(refreshToken => new HttpParams()
-                .set('refreshToken', refreshToken)),
-            switchMap(body => this.http.post<any>(`${environment.authUrl}/user/public/logout`,
-                body,
-                {headers: {'Content-type': 'application/x-www-form-urlencoded'}}
-            )),
-            tap(() => this.doLogoutUser()),
+        const body = new HttpParams().set('refreshToken', refreshToken);
+        this.http.post<any>(`${environment.authUrl}/user/public/logout`,
+            body,
+            {headers: {'Content-type': 'application/x-www-form-urlencoded'}}
+        ).pipe(tap(() => this.doLogoutUser()),
             mapTo(true),
             catchError(error => {
                 return of(false);
-            }));
+            })).subscribe();
     }
 
     isLoggedIn() {
@@ -79,7 +79,7 @@ export class AuthService {
     refreshToken() {
         const headers = this.authBasic;
         return this.isTokenRefreshing ? this.tokenChange.pipe(skip(1), take(1), map(value => new Tokens(value))) :
-         this.getRefreshToken().pipe(
+            this.getRefreshToken().pipe(
                 filter(value => !!value),
                 tap(x => this.isTokenRefreshing = true),
                 map(refreshToken => new HttpParams()
@@ -99,7 +99,7 @@ export class AuthService {
         const time = this.validUntil.getTime();
         const number = Date.now();
         const b = this.validUntil.getTime() < Date.now();
-        if (this.getJwtToken() && this.validUntil.getTime() - 2000 < Date.now()) {
+        if (this.getJwtToken() && this.validUntil.getTime() - 3000 < Date.now()) {
             return this.refreshToken().pipe(map((token: Tokens) => token.access_token));
         }
         return this.tokenChange.pipe(take(1));

@@ -12,6 +12,11 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
+        path: 'landing-page',
+        loadChildren: () =>
+            import('./pages/landing-page/landing-page.module').then((m) => m.LandingPagePageModule),
+    },
+    {
         path: 'folder/:id',
         loadChildren: () =>
             import('./folder/folder.module').then((m) => m.FolderPageModule),
@@ -45,7 +50,6 @@ const routes: Routes = [
         loadChildren: () =>
             import('./pages/home/home.module').then((m) => m.HomePageModule),
     },
-
     {
         path: 'patient-info/:id',
         loadChildren: () =>
@@ -115,7 +119,12 @@ const routes: Routes = [
     {
         path: 'video-call',
         loadChildren: () => import('./pages/video-call/video-call.module').then(m => m.VideoCallPageModule)
-    }
+    },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('./pages/landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+  }
+
 ];
 
 @NgModule({

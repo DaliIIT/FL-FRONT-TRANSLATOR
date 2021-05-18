@@ -16,8 +16,8 @@ $control-color: #483CDC;
   max-height: 100vh;
   height: calc(100vh - 3rem);
   border-radius: 4px;
-  background: url("src/assets/image/user.svg") no-repeat center;
-  background-size: 40%;
+  //background: url("src/assets/image/user.svg") no-repeat center;
+  //background-size: 40%;
 }
 
 #local-video {
@@ -163,4 +163,5 @@ $control-color: #483CDC;
   top: 0;
   left: calc(50% - 2.5rem);
   background-color: #FC015B;
+  z-index: 100;
 }

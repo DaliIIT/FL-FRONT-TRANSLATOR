@@ -18,8 +18,11 @@ export class LoginGuard implements CanActivate, CanLoad {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        if (!this.auth.getJwtToken()) {
+            return true;
+        }
         return this.auth.getValidJwtTokenOrRefresh$().pipe(map(token => {
-            this.navigate();
+            this.nav.navigateRoot('/landing-page');
             return false;
         }), catchError(err => of(true)));
     }
@@ -30,14 +33,5 @@ export class LoginGuard implements CanActivate, CanLoad {
         return true;
     }
 
-    private navigate() {
-        if (this.auth.getClaims().some(role => role === 'ROLE_ADMIN')) {
-            this.nav.navigateRoot('/admin/home');
-        } else if (this.auth.getClaims().some(role => role === 'ROLE_TRANSLATOR')) {
-            this.nav.navigateRoot('/translator/tabs/home');
-        } else if (this.auth.getClaims().some(role => role === 'ROLE_CLIENT')) {
-            this.nav.navigateRoot('/doctor/home');
-        }
-    }
 
 }

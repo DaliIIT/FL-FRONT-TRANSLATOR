@@ -39,7 +39,7 @@ export class SigninPage implements OnInit {
         this.auth.login(formValue).subscribe(result => {
             if (!result.error) {
                 if (this.auth.isLoggedIn()) {
-                    this.navigate();
+                    this.nav.navigateRoot('/landing-page');
                 }
                 this.loginForm.reset();
             }
@@ -47,13 +47,4 @@ export class SigninPage implements OnInit {
         });
     }
 
-    private navigate() {
-        if (this.auth.getClaims().some(role => role === 'ROLE_ADMIN')) {
-            this.nav.navigateRoot('/admin/home');
-        } else if (this.auth.getClaims().some(role => role === 'ROLE_TRANSLATOR')) {
-            this.nav.navigateRoot('/translator/tabs/home');
-        } else if (this.auth.getClaims().some(role => role === 'ROLE_CLIENT')) {
-            this.nav.navigateRoot('/doctor/home');
-        }
-    }
 }

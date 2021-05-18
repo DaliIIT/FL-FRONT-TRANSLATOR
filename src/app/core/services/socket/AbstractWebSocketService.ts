@@ -50,7 +50,7 @@ export abstract class AbstractWebSocketService {
 
 
     /**
-     * Return an observable containing the socket status
+     * Return an observable containing the socket status (true if connected)
      */
     public getStatus = () => {
         return this.isConnected$;

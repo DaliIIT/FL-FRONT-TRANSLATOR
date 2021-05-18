@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  authUrl: 'https://5f71b8eccc6b.ngrok.io',
-  wsUrl: 'ws://5f71b8eccc6b.ngrok.io/stomp',
+  authUrl: 'http://192.168.1.4:8080',
+  wsUrl: 'ws://192.168.1.4:8080/stomp',
   iceServers: [
     {
       urls: 'stun:stun.l.google.com:19302'
