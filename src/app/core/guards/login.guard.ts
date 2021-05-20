@@ -24,7 +24,9 @@ export class LoginGuard implements CanActivate, CanLoad {
         return this.auth.getValidJwtTokenOrRefresh$().pipe(map(token => {
             this.nav.navigateRoot('/landing-page');
             return false;
-        }), catchError(err => of(true)));
+        }), catchError(err => {
+            return of(true);
+        }));
     }
 
     canLoad(

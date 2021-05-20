@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  authUrl: 'http://192.168.1.4:8080',
-  wsUrl: 'ws://192.168.1.4:8080/stomp',
+  authUrl: 'https://boiling-brook-03847.herokuapp.com',
+  wsUrl: 'wss://boiling-brook-03847.herokuapp.com/stomp',
   iceServers: [
     {
       urls: 'stun:stun.l.google.com:19302'

@@ -65,7 +65,8 @@ export class AuthService {
         this.http.post<any>(`${environment.authUrl}/user/public/logout`,
             body,
             {headers: {'Content-type': 'application/x-www-form-urlencoded'}}
-        ).pipe(tap(() => this.doLogoutUser()),
+        ).pipe(
+            tap(() => this.doLogoutUser()),
             mapTo(true),
             catchError(error => {
                 return of(false);
@@ -100,7 +101,11 @@ export class AuthService {
         const number = Date.now();
         const b = this.validUntil.getTime() < Date.now();
         if (this.getJwtToken() && this.validUntil.getTime() - 3000 < Date.now()) {
-            return this.refreshToken().pipe(map((token: Tokens) => token.access_token));
+            return this.refreshToken().pipe(map((token: Tokens) => token.access_token), catchError((err) => {
+                this.logout();
+                this.router.navigate(['/auth']);
+                return of(err);
+            }));
         }
         return this.tokenChange.pipe(take(1));
         // return from(this.nativeStorage.getItem(ACCESS_TOKEN)).pipe(catchError(err => of(null)));
